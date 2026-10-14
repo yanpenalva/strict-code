@@ -1,30 +1,30 @@
-# Guia de testes e processo
+# Guia de processo
 
-## Testes
+## Ordem do trabalho
 
-- Toda mudança de comportamento adiciona ou atualiza teste focado, salvo
-  cobertura existente comprovada (citar o teste que já cobre).
-- Alvo: 80% no código novo; negativos de segurança e regras de negócio têm
-  prioridade sobre cobertura percentual.
-- Rodar no ambiente dono do código (container/serviço do projeto), restrito ao
-  escopo alterado; suíte ampla só quando a ferramenta exige contexto.
+1. Spec/plano aprovados antes de qualquer execução.
+2. Backend primeiro quando há contrato; frontend consome o contrato registrado.
+3. Trabalho em ondas por dependência; fatias pequenas com gates verdes.
+4. Revisão (`review-checklist.md`) → ajustar só o aprovado/pedido → documentar
+   o afetado → fechar com mensagem de commit proposta.
+
+## Escopo de verificação
+
+- `changed_files` = fonte adicionada, copiada, modificada ou renomeada; vazia = erro.
+- Lint, formato e policy SÓ nesses arquivos; suíte/typecheck/análise ampla só
+  quando a ferramenta exige contexto — registrar motivo e escopo.
+- Comandos no ambiente dono do código (container/serviço do projeto).
 
 ## Commits e Git
 
-- Conventional Commits (`tipo(escopo): descrição`); hooks de lint/autofix ativos.
-- `changed_files` = arquivos fonte adicionados, copiados, modificados ou
-  renomeados no escopo; lista vazia é erro.
-- Modo de finalização Git indefinido = confirmar cada ação (commit e push
-  separados); nunca force-push nem inferir aprovação de resposta anterior.
-- Merge e PR somente com OK explícito do Yan, com CI verde e branch limpa.
+- Conventional Commits + hooks (lint/autofix no commit, gates no push).
+- Finalização indefinida = confirmar cada ação; nunca force-push nem inferir
+  aprovação passada. Merge/PR só com OK explícito, CI verde, branch limpa.
 
-## Processo do trabalho
+## Documentação do trabalho
 
-1. Spec/plano aprovados antes de qualquer execução.
-2. Implementar backend primeiro quando houver contrato; frontend consome o
-   contrato registrado, nunca adivinha.
-3. Checks (lint, formatação, policy) restritos a `changed_files`.
-4. Revisão com `file:line`, severidade (bloqueante/não-bloqueante) e veredito
-   final com contagem.
-5. Ajustar só o aprovado ou pedido; documentar o afetado e fechar com mensagem
-   de commit proposta.
+- Mudança de comportamento/contrato atualiza doc do módulo: responsabilidade,
+  inputs/outputs/erros, invariantes, efeitos colaterais, auth/privacidade,
+  config e exemplos. Sem duplicar fato sem dono canônico.
+- Relatório final: comandos, ambientes, passa-falha, asserts/cobertura, falha
+  pré-existente ou pendente — com `file:line` por achado e veredito com contagem.

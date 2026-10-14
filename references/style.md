@@ -1,19 +1,19 @@
 # Guia de estilo
 
-Detalhamento das regras de escrita. Cada item mostra o padrão, o anti-padrão
-e o porquê em uma linha.
+Detalhamento das regras de escrita: padrão, anti-padrão e porquê.
 
 ## KISS / YAGNI
 
-- Implementar só o comportamento aprovado no spec; abstração (interface,
-  parâmetro, camada) entra quando o segundo caso real aparece, nunca antes.
-- Apagar código morto no mesmo trabalho que o revela; não carregar "para o futuro".
-- Preferir a construção mais simples que passa nos testes e nos limites abaixo.
+- Implementar só o comportamento aprovado; abstração (interface, parâmetro,
+  camada) entra no segundo caso real, nunca antes.
+- Apagar código morto no trabalho que o revela; sem "para o futuro".
+- Extrair abstração só com repetição real de regra com um dono — nunca para
+  baixar métrica; não fragmentar em wrappers triviais para driblar teto.
 
 ## Sem `else` / `elseif`
 
 Fluxo linear com saída antecipada. Vale para PHP, TS/JS e templates Vue
-(`v-else`, `v-else-if` entram na mesma proibição).
+(`v-else`, `v-else-if` na mesma proibição).
 
 ```php
 // NÃO
@@ -34,8 +34,9 @@ function status(int $score): string {
 }
 ```
 
-Múltiplas ramificações usam `match` (PHP), ternário encadeado legível ou
-`computed` (Vue) — nunca pirâmide de condicionais.
+Ramificações finitas usam `match`; decisões complexas viram predicados
+nomeados ou colaborador dedicado. Proibido trocar `else` por ternário aninhado
+ou pirâmide de `if` — no máximo 3 níveis significativos, alvo 1.
 
 ## Strings: interpolação, nunca concatenação
 
@@ -55,26 +56,35 @@ const msg = 'Usuário ' + nome + ' criado';
 const msg = `Usuário ${nome} criado`;
 ```
 
-Valores dinâmicos em SQL sempre via parameter binding — interpolar valor em
-query é falha de segurança, não de estilo.
+Mensagens de exceção, logs, chaves de tradução, URLs e chaves de array:
+interpolação. Query: sempre parameter binding — interpolar valor em SQL é
+falha de segurança, não de estilo.
 
 ## Funções nativas e callbacks
 
 - PHP com namespace importa nativas: `use function sprintf;`,
-  `use function in_array;` (resolução global + otimização do compilador).
+  `use function in_array;`, `use function count;` (resolução global +
+  otimização do compilador; sem prefixo `\` inline).
+- Não usar `require_once` para carregar configuração de código namespaced —
+  usar o mecanismo de config do framework.
 - Callbacks/handlers locais como arrow functions (`fn() =>`, `(x) =>`);
-  declaração `function` só onde a linguagem/framework exige.
+  `function` só onde a linguagem/framework exige.
+- Ternário aninhado: extrair para statements nomeados; parêntese redundante
+  em cast/coalescência: remover; parâmetro não usado: remover com callers.
 
 ## Tipagem
 
-- `declare(strict_types=1);` em todo arquivo PHP; tipos explícitos em
-  parâmetros, retornos e propriedades; evitar `mixed` sem justificativa no spec.
-- TS/Vue: sem `any` implícito; tipos nos limites públicos (props, emits,
-  respostas de API, payloads).
-- Valores fechados: enum dedicado; demais constantes tipadas; nunca string
-  ou número mágico espalhado.
-- Dependências via construtor, imutáveis onde couber; regra de negócio em
-  serviços/domínio — componente Vue só apresenta e orquestra.
+- `declare(strict_types=1);` em todo PHP; tipos em parâmetros, retornos e
+  propriedades; `mixed` só com justificativa; PHPDoc só para generics,
+  collections, arrays complexos e contratos inexprimíveis — sem duplicar a
+  assinatura.
+- TS/Vue: sem `any` (preciso ou `unknown`), sem `!`, strict null checks,
+  `satisfies` para literais; tipos nos limites públicos (props, emits, API).
+- Conjuntos fechados: enum (backed quando há valor); resto: constante tipada
+  ou value object. Nunca número/string mágica espalhada.
+- Dependências via construtor (`private readonly` + promoção), imutáveis onde
+  couber; estático com dependência: proibido — injetar.
+- `final class` por padrão; extensão só com motivo documentado.
 
 ## Nomenclatura
 
@@ -82,10 +92,11 @@ query é falha de segurança, não de estilo.
 |---|---|---|
 | Classes, componentes | PascalCase | `InvoiceService`, `UserCard` |
 | Métodos, vars, funções | camelCase | `issueInvoice`, `dueDate` |
+| Constantes | SCREAMING_SNAKE_CASE tipada | `MAX_ITEMS` |
 | Banco, payloads | snake_case | `due_date`, `customer_id` |
 
-Nomes revelam intenção (`activeLoans`, não `data2`); idioma do domínio de
-negócio, técnico em inglês.
+Nomes revelam intenção (`activeLoans`, não `data2`/`$x`/`get()`); idioma do
+domínio de negócio, técnico em inglês.
 
 ## Limites de tamanho
 
@@ -96,11 +107,11 @@ negócio, técnico em inglês.
 | Linhas por método/função | 150 | <30; >50 candidatar extração |
 | Returns por método | 3 | — |
 
-Arquivo que já encosta no teto é decomposto no mesmo trabalho — sem refatorar
-arquivos fora do escopo.
+Acima do teto no arquivo alterado: decompor no mesmo trabalho (helpers,
+services, composables coesos, cada um com seam focada e teste). Sem refatorar
+fora do escopo.
 
 ## Comentários
 
-- Produção: só decisão não-óbvia (o porquê, nunca o quê).
-- PHPDoc onde tipagem ou análise estática precisa; narração de IA
-  (`// busca o usuário e retorna...`) é removida antes do merge.
+- Produção: só decisão não-óbvia (o porquê, restrição de compatibilidade).
+- PHPDoc onde tipagem/análise precisa; narração de IA removida antes do merge.

@@ -1,7 +1,7 @@
 ---
 name: code-standards
 description: Use when writing or reviewing code for Yan's projects.
-version: 0.2.0
+version: 0.3.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -30,44 +30,36 @@ salvo regra contrária registrada no spec do trabalho.
 - Desconhecido registra-se `NOT FOUND`; nunca inventar requisito, contrato ou evidência.
 - Nunca alegar validação ou sucesso sem rodar o comando correspondente.
 
-## Estilo (detalhes em `references/style.md`)
+## Regras nucleares
 
 - Sem `else`, `elseif`, `v-else`, `v-else-if`: guard clauses, early return,
-  `match`, `computed` ou fluxo linear equivalente.
-- Strings por interpolação (`"texto {$var}"`, template literal, `sprintf`);
-  nunca concatenação para montar texto; SQL sempre com parameter binding.
-- PHP com namespace: importar nativas com `use function <nome>;`.
-- JS/TS/Vue: arrow functions em locais, callbacks e handlers; PHP: `fn() =>`
-  em closures simples.
-- Tipagem completa: `strict_types = 1` em todo PHP, tipos explícitos em
-  assinaturas, injeção por construtor, dependências imutáveis onde couber.
-- Nomenclatura: PascalCase (classes, componentes), camelCase (métodos, vars,
-  funções), snake_case (banco, payloads); idioma do domínio, sem magic strings.
-- Teto bloqueante: 500 linhas/arquivo, 15 métodos/funções, 150 linhas/método,
-  3 returns. Alvo: <30 linhas; >50 candidatar extração. Revisão nunca rejeita
-  código dentro do teto.
-- Comentário em produção só para decisão não-óbvia; PHPDoc para tipagem/análise.
+  `match`, `computed` ou fluxo linear equivalente (`style.md`).
+- Strings por interpolação; SQL só com parameter binding (`style.md`).
+- PHP com namespace importa nativas com `use function <nome>;` (`style.md`).
+- Tipagem completa + `strict_types = 1`; enums para conjuntos fechados (`style.md`).
+- Tetos bloqueantes: 500 linhas/arquivo, 15 métodos/funções, 150 linhas/método,
+  3 returns, 7 params, complexidade ciclomática ≤10 / cognitiva ≤15
+  (`quality-gates.md`). Alvo: <30 linhas; >50 candidatar extração.
+- Camadas: controller fino, regra no service, query no repository, validação no
+  FormRequest, formato no Resource (`patterns.md`).
+- Logs sanitizados; authZ pelo contrato explícito da rota (`security.md`).
+- Toda mudança de comportamento tem teste focado; alvo 80% no código novo
+  (`testing.md`, `workflow.md`).
+- Conventional Commits + hooks; merge/PR só com OK explícito (`conventions.md`).
+- Revisão fecha com `file:line` + severidade + veredito (`review-checklist.md`).
 
-## Segurança (detalhes em `references/security.md`)
+## Guias
 
-- Logs com contexto diagnóstico sanitizado; nunca segredo, token, senha, dado
-  pessoal ou stack trace bruto.
-- Autorização pelo contrato explícito da rota (middleware/policy/rota pública/
-  heartbeat); checklist genérico nunca veta exceção documentada.
-- Validar todo input externo; autenticar/autorizar pelos mecanismos existentes.
-- Tokens: expiração, algoritmo, revogação — com testes de expirado/revogado,
-  perfil inativo e isolamento entre usuários.
-- Auditar mutações sensíveis; retenção e imutabilidade definidas no spec.
-
-## Testes e processo (detalhes em `references/workflow.md`)
-
-- Toda mudança de comportamento tem teste focado, salvo cobertura existente
-  comprovada; alvo 80% no código novo.
-- Conventional Commits + hooks de lint/autofix; modo de finalização Git
-  indefinido = confirmar cada ação.
-- Spec/plano aprovados antes de executar; checks (lint/format/policy) restritos
-  aos arquivos alterados; lista vazia é erro.
-- Merge e PR somente com OK explícito do Yan.
+| Precisa de | Leia |
+|---|---|
+| Estilo, tipagem, nomenclatura, limites | `references/style.md` |
+| Padrões de camada, queries, exceções, compat | `references/patterns.md` |
+| Gates numéricos, Sonar, hotspots | `references/quality-gates.md` |
+| Commits, hooks, toolchain, migrations | `references/conventions.md` |
+| Segurança e privacidade | `references/security.md` |
+| Estratégia e anatomia de testes | `references/testing.md` |
+| Processo do trabalho | `references/workflow.md` |
+| Checklist de revisão | `references/review-checklist.md` |
 
 ## Pitfalls
 
@@ -76,6 +68,8 @@ salvo regra contrária registrada no spec do trabalho.
 - `allow_failure: true` no CI não dispensa gate verde na revisão.
 - Validação de manifesto de contexto não comprova qualidade do código.
 - Spec desatualizada contra manifesto: sincronizar a spec.
+- Supressão de alerta de analisador (`NOSONAR` e equivalentes) só com motivo
+  técnico + referência do trabalho; revisar supressões antigas.
 
 ## Verification
 
