@@ -28,7 +28,7 @@ Unknowns stay `NOT FOUND` until discovered; inferences are labeled as such.
 ## 3. Routing depth
 
 Derive deterministically: `minimal` (docs/small fixes), `standard`
-(default), `extended` (large, cross-module, sensitive, or low confidence).
+(default), `extended` (large, cross-module, sensitive, or high-risk work).
 Depth may only be RAISED by an explicitly recorded human decision — never
 lowered silently. Load only the guides the current phase requires; keep the
 rest deferred. A route is a depth contract, not permission to skip gates.
@@ -61,7 +61,7 @@ policy never needs its full document in every phase.
 first match:
 
 ```text
-0. confidence = low → floor at standard: never derive minimal on low confidence; gather evidence and re-derive
+0. confidence = low → evaluate steps 1–3 normally, then take max(derived, standard); gather evidence and re-derive
 1. complexity = high OR risk in {high, critical}
    OR impact in {cross-module, system} OR security = sensitive → extended
 2. complexity = low AND risk = low AND impact = local

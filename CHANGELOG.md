@@ -6,7 +6,7 @@ development iterations; 1.0.0 is the first stable release.
 ## 1.0.0
 
 - Stable release: 30 reference guides, en-US throughout, audited twice (sol
-  medium executor + sol low reviewer); re-audit residuals fixed in follow-ups.
+  medium executor + sol low reviewer); findings tracked in git history.
 
 ## 0.9.x
 

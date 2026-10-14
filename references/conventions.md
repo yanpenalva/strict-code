@@ -2,11 +2,7 @@
 
 ## Naming
 
-Naming: `style.md` is the sole owner. Database additions only: plural snake_case tables; column `comment` per migrations below.
-
-Generic names (`$data`, `$x`, `get()`, `process()`) fail review — names
-carry intent. Exception: `$q`/`$query` in `when()` closures. Class
-properties: camelCase internally, snake_case for DB mapping.
+Naming: `style.md` is the sole owner (including generic-name bans and casing). Database only: plural snake_case tables; column `comment` per migrations below.
 
 ## Commits
 
