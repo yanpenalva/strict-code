@@ -1,4 +1,4 @@
-# code-standards-skill
+# strict-code
 
 Complete code writing and review standards (PHP/Laravel,
 TypeScript/JavaScript/Vue): style, architecture, quality gates,
