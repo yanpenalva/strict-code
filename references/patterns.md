@@ -2,6 +2,16 @@
 
 Boundaries and patterns for Laravel/PHP backends and Vue/TS frontends.
 
+## Decompose by domain
+
+Always split by business domain first, by technical role second. New code
+lands in its owning domain (services, repositories, requests namespaced per
+domain); cross-domain use goes through explicit stable contracts — never by
+reaching into another domain's internals. A class or file at its ceiling
+splits along domain seams before any other axis. Confirmed ceiling: at most
+15 declared methods/functions per production class/file (including private
+methods and constructor).
+
 ## Layer boundaries (backend)
 
 - Controller: takes validated input, authorizes, calls one service, maps the
@@ -11,6 +21,9 @@ Boundaries and patterns for Laravel/PHP backends and Vue/TS frontends.
 - Repository: owns query composition and persistence details, exposed via interface.
 - FormRequest: owns HTTP validation (rules + messages); injected into the controller.
 - Resource: owns response shape; persistence models never leak into serialization.
+- Model: relations, casts, fillable, scopes only — no business rules, no
+  queries beyond scopes, no fat models. Controllers: delegate only (see
+  `anti-patterns.md`) — no fat controllers.
 - Never introduce a new pattern without a concrete need recorded in the spec.
 
 ## Finite state machines

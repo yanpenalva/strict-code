@@ -58,7 +58,7 @@ $query
 - [ ] Every parameter, return, and property typed; `readonly` where immutable?
 - [ ] `#[Override]` on overrides; property hooks or dedicated methods for get/set?
 - [ ] Array search via `array_find/any/all` (PHP ≥8.4 or project-version equivalent); JSON via `json_validate()` (PHP ≥8.3)?
-- [ ] Sparse comments (non-obvious decisions only); PHPDoc for typing/analysis?
+- [ ] Zero narrative comments; PHPDoc only where the type is inexpressible?
 
 ## 7. SOLID / Clean `[BLOCKING]`
 

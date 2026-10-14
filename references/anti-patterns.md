@@ -41,3 +41,10 @@ enables eager loading and documents the graph.
 
 Public service with no interface. Rule: every public service has one —
 enables constructor injection of abstractions and test doubles (DIP).
+
+## 8. Fat model or fat controller `[BLOCKING]`
+
+Business rules, queries, or orchestration inside models or controllers.
+Rule: models carry relations/casts/fillable/scopes only; controllers
+delegate to one service call. Fix: move rules to services, queries to
+repositories.

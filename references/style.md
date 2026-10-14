@@ -37,6 +37,21 @@ Finite dispatch uses `match`; complex decisions become named predicates or a
 dedicated collaborator. Never swap `else` for nested ternaries or `if`
 pyramids — at most 3 meaningful levels, target 1.
 
+Never nest calls inside conditions: assign to a named variable first, then branch.
+
+```php
+// WRONG — nested call inside the condition
+if ($this->repository->find($id)->isActive()) {
+    ...
+}
+
+// RIGHT — named variable, then branch
+$model = $this->repository->find($id);
+if ($model->isActive()) {
+    ...
+}
+```
+
 ## Strings: interpolation, never concatenation
 
 ```php
@@ -108,5 +123,7 @@ blocking. Target <30 lines; extraction candidate >50.
 
 ## Comments
 
-- Production: non-obvious decisions only (the why, compatibility constraints).
-- PHPDoc where typing/analysis needs it; AI narration removed before merge.
+- Production: no narrative comments — code must read without them; a needed
+  explanation means the name or structure failed, rename first.
+- Only type-level annotations (PHPDoc generics/collections/complex arrays)
+  where the language cannot express the type. AI narration removed before merge.
