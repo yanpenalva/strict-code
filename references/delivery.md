@@ -19,6 +19,16 @@ manifest consistent, evidence gaps listed, approvals named. Verdict `READY` or
 `NOT READY`. A mismatch is a finding — adjust plan/manifest or record a
 justified reclassification. Never fix code or approve risk in preflight.
 
+## Phase contracts
+
+- **Verify:** inputs = request, spec, plan, progress, diff, test/quality
+evidence, checklist. Produces verification + review records (evidence,
+correctness, regressions, security, scope drift, risks, verdict). Never
+modifies implementation; findings give location, evidence, impact, smallest fix.
+- **Release:** inputs = green verify + release record (approver, target,
+readiness, smoke, observation window, rollback trigger). Human authorizes;
+agent prepares. Details in `release.md` (+ `incident.md` for hotfixes).
+
 ## Artifacts
 
 - **Spec** (versioned, required): scope, contracts, decisions, and a

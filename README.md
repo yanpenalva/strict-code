@@ -26,6 +26,10 @@ TypeScript/JavaScript/Vue). All contents in en-US.
 - `references/interaction.md` — uncertainty states and questioning protocol.
 - `references/project-profile.md` — per-project instantiation (any stack).
 - `references/release.md` — release record, observation, postmortem.
+- `references/classification.md` — objective rubrics per axis.
+- `references/domains.md` — context domains and promotion triggers.
+- `references/incident.md` — bug/incident/hotfix operation, postmortem.
+- `references/discovery.md` — product discovery gate and outcome.
 - `references/artifact-templates.md` — spec/review/progress/manifest shapes.
 - `references/agent-comms.md` — dense communication + prompt/handoff shapes.
 - `references/architecture-decisions.md` — ADR practice + stack checklist.

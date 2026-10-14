@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: Use when writing or reviewing code for Yan's projects.
-version: 0.7.0
+version: 0.8.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -93,6 +93,10 @@ authorization stay separate decisions (`profiles.md`).
 | Interaction and uncertainty | `references/interaction.md` |
 | Project instantiation | `references/project-profile.md` |
 | Release and observation | `references/release.md` |
+| Classification rubrics | `references/classification.md` |
+| Context domains and triggers | `references/domains.md` |
+| Incident and hotfix operation | `references/incident.md` |
+| Product discovery | `references/discovery.md` |
 
 ## Pitfalls
 

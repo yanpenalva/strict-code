@@ -36,3 +36,13 @@ Date, author, what changed, why, affected files, migration/rollback notes.
 
 Machine-readable: task id, track/type, classification, routing depth,
 `required` vs `deferred` domains (disjoint), phase. Rebuild when reclassifying.
+
+## Work-item fields
+
+`id`, `title`, `track` (product/support), `type` (feature/bug/incident/hotfix),
+`phase` (discover/triage/contain/specify/plan/preflight/execute/verify/release/
+observe/learn/close), `status` (draft/ready/active/blocked/completed/cancelled),
+`risk` (low/medium/high/critical), `severity` for incidents (sev1–sev4), `owner`,
+`conversation_profile`, `git_finalization_mode` (confirm_each/automatic),
+`classification` (complexity/impact/security/confidence), `routing` (derived +
+effective + override authority/reason), `policy_exceptions`, `phase_history`.
