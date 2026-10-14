@@ -95,7 +95,10 @@ SQL is a security failure, not a style one.
 | Database, payloads | snake_case | `due_date`, `customer_id` |
 
 Names reveal intent (`activeLoans`, not `data2`/`$x`/`get()`); business-domain
-language for domain terms, English for technical ones.
+language for domain terms, English for technical ones. New-reader test: a
+reader seeing only the name must assign the right domain meaning without
+opening the body or needing a comment; banned generic names (`$data`, `$x`,
+`$tmp`, `$res`, `get()`, `process()`) fail automatically.
 
 ## Size limits
 

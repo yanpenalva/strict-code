@@ -40,7 +40,7 @@ $query
 
 ## 4. Performance and composition `[TARGET]`
 
-- [ ] Most performant viable solution considered (query builder, cache, chunk)?
+- [ ] Performance evidenced, not asserted: query counts within profile budget, listing endpoints paginated, N+1 covered by a failing-without-eager test, repeated/heavy reads cached or justified uncached?
 - [ ] `unset()` avoided where safe accessors/slicing/mapping resolve without
   needless mutation?
 - [ ] `Collection` only where the pipeline reads better; `foreach` elsewhere?

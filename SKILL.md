@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: Use when writing or reviewing code for Yan's projects.
-version: 0.9.0
+version: 0.9.1
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]

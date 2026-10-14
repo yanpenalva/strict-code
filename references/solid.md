@@ -5,6 +5,11 @@ speculative interfaces or layers.
 
 ## SRP — one reason to change
 
+Operational test: list the unrelated reasons this class would change (new
+actor, new rule, new format, new datasource). More than one independent
+reason → split along the reasons. A split is correct when each part can be
+described without mentioning the other.
+
 ```php
 // WRONG — validation + persistence + notification in one method
 public function register(array $data): User

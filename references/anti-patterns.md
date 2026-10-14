@@ -27,7 +27,9 @@ Identical 401 throws in dozens of methods. Fix: single `requireUser()` guard
 
 ## 5. Fat traits `[TARGET]`
 
-Traits carrying complex business logic. Rule: traits hold small reusable
+Traits carrying complex business logic. Boundary: a trait is stateless, holds
+at most 3 small methods, owns no domain rule, performs no I/O. Anything past
+that boundary is a service or collaborator. Rule: traits hold small reusable
 mechanics only; business logic lives in services.
 
 ## 6. Missing relationships `[TARGET]`

@@ -36,7 +36,9 @@ const doubled = computed(() => count.value * 2);
 
 ## Templates
 
-- No extensive logic inline — `computed` instead; no `v-else`/`v-else-if`
-  (guard-style rendering: early `v-if` returns via computed flags).
+- No extensive logic inline — threshold: template expressions contain at most
+  property access and simple booleans; conditions reference `computed` flags,
+  formatting lives in `computed`, method calls in templates only as event
+  handlers. Anything past that moves into script.
 - No direct prop mutation; no unnecessary or deep watchers; no `v-html` with
   unsanitized content; loading/error states always handled.
