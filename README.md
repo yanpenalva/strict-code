@@ -174,5 +174,5 @@ MIT — see [LICENSE](LICENSE).
 ## ✍️ Author
 
 **Yan Penalva** — Senior Software Engineer.
-Portfolio: [penalva.me](https://penalva.me) · GitHub:
+Portfolio: [penalva.me](https://www.penalva.me) · GitHub:
 [yanpenalva](https://github.com/yanpenalva)
