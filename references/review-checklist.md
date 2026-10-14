@@ -10,9 +10,10 @@ Mandatory before opening a PR or calling a task done. Mark each item.
 public function history(int $id): array
 {
     if ($id <= 0) {
-        throw new HttpException(422, 'Invalid ID.');
+        throw new HttpException(Response::HTTP_UNPROCESSABLE_ENTITY, 'Invalid ID.');
     }
-    $this->authorize('view', Model::findOrFail($id));
+    $model = $this->repository->findOrFail($id);
+    $this->authorize('view', $model);
     return $this->repository->history($id);
 }
 ```
@@ -35,8 +36,7 @@ $query
 ## 3. No `else` `[BLOCKING]`
 
 - [ ] No changed production file contains `else`, `elseif`, `v-else`, `v-else-if`?
-- [ ] Pre-existing branches in the changed file were refactored preserving
-  evaluation order and side effects?
+- [ ] Directly-relevant pre-existing branches in touched code refactored preserving order and side effects; wider cleanup split into its own task?
 
 ## 4. Performance and composition `[TARGET]`
 
@@ -57,7 +57,7 @@ $query
 - [ ] `declare(strict_types = 1)` on top of PHP files?
 - [ ] Every parameter, return, and property typed; `readonly` where immutable?
 - [ ] `#[Override]` on overrides; property hooks or dedicated methods for get/set?
-- [ ] Array search via `array_find/any/all`; JSON via `json_validate()`?
+- [ ] Array search via `array_find/any/all` (PHP ≥8.4 or project-version equivalent); JSON via `json_validate()` (PHP ≥8.3)?
 - [ ] Sparse comments (non-obvious decisions only); PHPDoc for typing/analysis?
 
 ## 7. SOLID / Clean `[BLOCKING]`

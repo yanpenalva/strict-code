@@ -27,6 +27,13 @@ const doubled = computed(() => count.value * 2);
 - HTTP calls live in services; components orchestrate. Mock the service layer
   in Vitest — never hit real endpoints, no sleeps, await promises/state.
 
+## Measurable experience
+
+- Accessibility baseline: keyboard paths, visible focus, screen-reader names —
+  values live in the project profile, never aspirational.
+- Budgets from the project profile (latency, bundle size, memory, query
+  counts), measured in CI.
+
 ## Templates
 
 - No extensive logic inline — `computed` instead; no `v-else`/`v-else-if`

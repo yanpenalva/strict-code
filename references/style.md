@@ -4,8 +4,7 @@ Writing rules in detail: pattern, anti-pattern, and why.
 
 ## KISS / YAGNI
 
-- Implement only approved behavior; abstraction (interface, parameter, layer)
-  enters on the second real case, never before.
+- Implement only approved behavior; speculative abstraction for a single hypothetical case waits for the second real case. Structural seams required by layering (service/repository interfaces) are architecture, not speculation.
 - Delete dead code in the task that reveals it; nothing "for the future".
 - Extract an abstraction only for real repetition of one-owned rules — never to
   lower a metric; no trivial wrappers or fragmented files to dodge ceilings.

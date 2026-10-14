@@ -58,6 +58,16 @@ Boundaries and patterns for Laravel/PHP backends and Vue/TS frontends.
   or giant `$o && $o->x` guards. Missing required data never becomes a silent
   valid-looking fallback.
 
+## Concurrency and idempotency
+
+- Prefer atomic updates over read-modify-write; choose isolation/locking per
+  measured risk (optimistic versioning first, pessimistic locks only under
+  proven contention).
+- Retried operations must be idempotent: idempotency keys on intake, dedupe on
+  the write path, safe replay semantics documented per operation.
+- Race conditions get regression tests (concurrent-attempt coverage), not just
+  sequential happy paths.
+
 ## Frontend
 
 - Components present and orchestrate (props, emits, loading, error); reusable

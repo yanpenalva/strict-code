@@ -48,6 +48,13 @@ without a mechanism does not count.
   rate limits on credentials.
 - Uploads: verified type, size, and content; nothing executable on public paths.
 
+## Dependency hygiene
+
+- Lockfiles committed; security audits run on every dependency change.
+- Vulnerability triage deadlines come from project policy (critical = immediate).
+- Provenance: prefer signed/official packages; removal criteria — unused,
+  unmaintained, or duplicated capability.
+
 ## Auditing
 
 - Sensitive mutations produce trails (who, what, when); retention and

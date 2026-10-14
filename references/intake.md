@@ -17,11 +17,11 @@ Record four axes before loading detail:
 
 | Axis | Scale |
 |---|---|
-| Complexity | trivial / small / medium / large |
-| Impact | local / module / cross-module / production |
-| Security | none / adjacent / sensitive / critical |
+| Complexity | low / medium / high (rubrics in `classification.md`) |
+| Impact | local / module / cross-module / system |
+| Security | none / relevant / sensitive (activations in `classification.md`) |
 | Risk | low / medium / high / critical |
-| Confidence | confirmed / inferred / unknown |
+| Confidence | low / medium / high (rates the classification itself) |
 
 Unknowns stay `NOT FOUND` until discovered; inferences are labeled as such.
 

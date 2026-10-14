@@ -19,8 +19,7 @@ Example: `[BLOCKING] method 172 lines (ceiling 150) — auth/LoginService.php:40
 
 ## Counting rules (apply identically every time)
 
-1. File lines: total lines of the file (`wc -l`); a file at 500 splits by
-   responsibility before the task closes.
+1. File lines: total lines of the file (`wc -l`); above 500 fails the gate; at 500 (or within 5% below) split by responsibility before adding anything.
 2. Declared methods: every named declaration including private methods and the
    constructor. Anonymous callbacks/closures do NOT count here — they count
    toward the enclosing function's size and complexity instead.
@@ -41,9 +40,9 @@ Example: `[BLOCKING] method 172 lines (ceiling 150) — auth/LoginService.php:40
 ## Enforcement procedure
 
 1. Measure changed production files only (`changed_files`; empty list = error).
-2. IF any ceiling is exceeded THEN decompose in the same task: split into
+2. IF any ceiling is met or exceeded THEN decompose in the same task: split into
    validation, lookup, transformation, persistence, and response construction
-   (cohesive private methods or dedicated collaborators).
+   (cohesive private methods or dedicated collaborators). Exceeding fails the gate outright.
 3. IF decomposition would create greater risk THEN record an approved, scoped
    exception (reason + expiry) — the only way to ship above a ceiling.
 4. NEVER evade a ceiling with trivial wrappers, fragmented files, or metric-only

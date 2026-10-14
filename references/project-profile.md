@@ -13,6 +13,7 @@ absent; no work item is created by onboarding.
   (coverage target, complexity caps) or `NOT FOUND`.
 - Conventions: naming deltas, commit hooks, migration rules, HTTP envelope.
 - Security: auth model, permission contract, secrets store, data classification.
+- Experience budgets: accessibility baseline + latency/bundle/memory/query caps (or NOT FOUND).
 - Operations: environments, deploy path, smoke check, observation signals,
   rollback trigger, human approvers.
 - Stack guides: which `references/*` apply verbatim, which need a per-project

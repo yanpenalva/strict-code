@@ -38,9 +38,15 @@ windows — never documents, emails, addresses, phones). Allowlist mappers per
 profile; snapshots/audit payloads immutable once created and served only via
 an authenticated, authorized endpoint — never in lists.
 
+## Evolution
+
+- Version public contracts; deprecate with windows + migration guides.
+- Consumer-contract tests and schema compatibility checks run on every
+  breaking-shaped change; removal only after the window closes.
+
 ## Uploads and transport
 
-- Upload rules: `file|mimes:<allowlist>|max:<bytes>` + service-side recheck;
+- Upload rules: `file|mimes:<allowlist>|max:<kilobytes>` (frameworks such as Laravel count file sizes in kilobytes — never assume bytes) + service-side recheck;
   files stored with context + reference id, never executable on public paths.
 - Stateless APIs (token): no session cookies, CSRF N/A; CORS allowlists known
   origins only.

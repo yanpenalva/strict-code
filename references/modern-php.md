@@ -32,7 +32,7 @@ $status = match ($code) {
 enum InvoiceStatus: string { case Draft = 'draft'; case Issued = 'issued'; }
 
 // never for methods that always throw
-actionNeverReturns(): never { throw new DomainException('...'); }
+function actionNeverReturns(): never { throw new DomainException('...'); }
 ```
 
 `#[Override]` on every override; typed constants (`private const string`) when

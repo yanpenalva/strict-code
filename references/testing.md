@@ -41,6 +41,13 @@ Authorization/route changes need feature tests; service rules need focused unit.
 - Driver-specific queries: cover on the production driver or a meaningful
   equivalent path — never weaken a test to make an incompatible query pass.
 
+## Determinism (anti-flaky)
+
+- Deterministic by default: seeded randomness, controlled clocks, isolated
+  parallel state; no real time, network, or shared mutable fixtures.
+- Quarantine is proportional and temporary: named owner + expiry + tracking
+  issue; retries reported with cause, never silent.
+
 ## What not to test by default
 
 - Framework behavior (trivial getters/setters), privates in isolation, config

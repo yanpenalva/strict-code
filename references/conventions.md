@@ -2,14 +2,7 @@
 
 ## Naming
 
-| Layer | Standard | Example |
-|---|---|---|
-| Classes, interfaces | PascalCase | `InvoiceService`, `InvoiceRepositoryInterface` |
-| Methods, functions, vars | camelCase | `issueInvoice`, `dueDate` |
-| Constants | SCREAMING_SNAKE_CASE, typed when possible | `MAX_ITEMS` |
-| Columns and tables | snake_case (plural tables) | `due_date`, `invoice_status_histories` |
-| Vue components (file + template) | PascalCase | `InvoiceList.vue` |
-| Global front constants/enums | SCREAMING_SNAKE_CASE or PascalCase | `SCREENS`, `ACTIONS` |
+Naming follows `style.md` (PascalCase classes/components, camelCase members, SCREAMING_SNAKE_CASE constants, snake_case data). Database additions: plural snake_case tables; property casing follows mapping (camelCase internal, snake_case DB).
 
 Generic names (`$data`, `$x`, `get()`, `process()`) fail review — names
 carry intent. Exception: `$q`/`$query` in `when()` closures. Class
@@ -38,24 +31,13 @@ Messages validated in the `commit-msg` hook (commitlint).
 | Front format | Prettier | formatting |
 | Front tests | Vitest (+ coverage) | unit/component |
 
-## Modern PHP (use when the project version supports it)
+## Modern PHP (full catalog in `modern-php.md`; project version gates every feature)
 
-- `final class` by default; `private readonly` + constructor promotion;
-  `match` over `elseif`; backed enums for closed sets; `#[Override]`; typed
-  constants; `array_find/any/all`; `json_validate()`; `mb_*`; named arguments
-  (3+ params); spread `[...$a, ...$b]` for merges; `Response::HTTP_*` instead
-  of magic numbers; `when()` on queries/collections.
+Kept here (not duplicated elsewhere):
 - `extract()`, `$$var`, `goto`, `&$var` references without justification: forbidden.
 - Always `===`/`!==`; money never as float (minor-unit integer or decimal string).
 
-## JS/TS/Vue
-
-- `const` by default, `let` only with reassignment, never `var`; `===`, `??`, `?.`.
-- TS: no `any` (precise type or `unknown`), no non-null `!`, strict null checks,
-  `satisfies` to narrow literals; `async/await`, no promise hell.
-- Vue: Composition API + `<script setup lang="ts">`; typed props/emits;
-  `:key` on every `v-for`; no prop mutation; no `v-html` with unsanitized
-  content; deep watchers only with reason.
+## JS/TS/Vue (full rules in `frontend.md` and `style.md`; not duplicated here)
 
 ## Migrations
 
