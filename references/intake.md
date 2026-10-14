@@ -19,7 +19,8 @@ Record four axes before loading detail:
 |---|---|
 | Complexity | trivial / small / medium / large |
 | Impact | local / module / cross-module / production |
-| Security | none / authZ-adjacent / sensitive-data / auth-critical |
+| Security | none / adjacent / sensitive / critical |
+| Risk | low / medium / high / critical |
 | Confidence | confirmed / inferred / unknown |
 
 Unknowns stay `NOT FOUND` until discovered; inferences are labeled as such.
@@ -54,7 +55,32 @@ when promoted by phase, trigger, classification, or explicit human request;
 `architecture` for cross-module/system or persistence impact. A mandatory
 policy never needs its full document in every phase.
 
-## 6. Questions and escalation
+## 6. Derived vs effective routing
+
+`derived` routing is computed deterministically — evaluate in order, stop at
+first match:
+
+```text
+1. complexity = high OR risk in {high, critical}
+   OR impact in {cross-module, system} OR security = sensitive → extended
+2. complexity = low AND risk = low AND impact = local
+   AND security = none → minimal
+3. otherwise → standard
+```
+
+`effective` equals `derived` unless a human explicitly overrides UPWARD
+(minimal→standard→extended); downgrades are rejected — depth drops only via
+legitimate reclassification on new evidence. Record both + authority + reason.
+Routing selects depth inside existing gates; it never removes a gate or
+weakens a MUST, and assigning a stronger agent never upgrades a route.
+
+Depth contracts: `minimal` = single-subtask plan, concise artifacts;
+`standard` = waves + independent reviewer when practical (default);
+`extended` = deep plan (alternatives, migration, rollback), per-wave evidence,
+security review when relevant, independent review, human-gated release,
+observation to close.
+
+## 7. Questions and escalation
 
 - Inspect discoverable facts first (repo, tracker, existing artifacts).
 - Decide reversible matters locally; record allowed assumptions.

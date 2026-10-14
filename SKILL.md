@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: Use when writing or reviewing code for Yan's projects.
-version: 0.6.0
+version: 0.7.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -18,7 +18,7 @@ unless the work spec records an exception.
 
 ## When to Use
 
-- Write, refactor, or review PHP/Laravel and TypeScript/JavaScript/Vue code.
+- Write, refactor, or review code in any language (agnostic core rules); PHP/Laravel and TypeScript/Vue have dedicated stack guides.
 - Pull requests, tests, migrations, commits, code audits.
 - Do not use for: documentation without code; product decisions (humans decide).
 
@@ -53,6 +53,15 @@ unless the work spec records an exception.
 - Work enters through intake/classification/routing before specifying (`intake.md`)
   and flows through the delivery stages to a criteria-checked close (`delivery.md`).
 - Reviews close with `file:line` + severity + verdict (`review-checklist.md`).
+- One primary working profile per task; classification, routing, and
+authorization stay separate decisions (`profiles.md`).
+- Multi-agent work uses named assignments with least privilege; production
+  and irreversible actions stay human (`orchestration.md`, `governance.md`).
+- Claims carry epistemic state (known/inferred/unknown/not found); questions
+  only for decision-changing gaps (`interaction.md`).
+- Each project instantiates a profile: stack, commands, thresholds, owners
+  (`project-profile.md`); releases carry approver, smoke, observation, and
+  rollback (`release.md`).
 
 ## Guides
 
@@ -78,6 +87,12 @@ unless the work spec records an exception.
 | Agent communication | `references/agent-comms.md` |
 | Architecture decisions | `references/architecture-decisions.md` |
 | Module documentation | `references/module-docs.md` |
+| Working profiles | `references/profiles.md` |
+| Multi-agent orchestration | `references/orchestration.md` |
+| AI governance | `references/governance.md` |
+| Interaction and uncertainty | `references/interaction.md` |
+| Project instantiation | `references/project-profile.md` |
+| Release and observation | `references/release.md` |
 
 ## Pitfalls
 

@@ -20,6 +20,12 @@ TypeScript/JavaScript/Vue). All contents in en-US.
 - `references/delivery.md` — stages, artifacts, waves, handoffs, closing criteria.
 - `references/workflow.md` — task order, scope, Git, documentation.
 - `references/review-checklist.md` — mandatory review checklist with severities.
+- `references/profiles.md` — working-profile lenses and resolution.
+- `references/orchestration.md` — multi-agent assignments and Git rules.
+- `references/governance.md` — AI governance (tools, data, approvals).
+- `references/interaction.md` — uncertainty states and questioning protocol.
+- `references/project-profile.md` — per-project instantiation (any stack).
+- `references/release.md` — release record, observation, postmortem.
 - `references/artifact-templates.md` — spec/review/progress/manifest shapes.
 - `references/agent-comms.md` — dense communication + prompt/handoff shapes.
 - `references/architecture-decisions.md` — ADR practice + stack checklist.

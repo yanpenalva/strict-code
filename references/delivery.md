@@ -5,12 +5,19 @@ maintenance may use a focused review with evidence instead — functional
 changes always need a versioned spec first and must not exceed its scope.
 
 ```text
-Specify → Plan → Backend → Frontend → Handoff → Validate → Review → Adjust → Document → Close
+Specify → Plan → Preflight → Backend → Frontend → Handoff → Validate → Review → Adjust → Document → Release → Observe → Close
 ```
 
 Split large full-stack work into backend-first then frontend slices; small
 coupled changes may run full-stack. Never fix findings unprompted during
 validation/review — adjust only approved or requested items.
+
+## Preflight gate
+
+Read-only check after planning: plan depth matches effective routing,
+manifest consistent, evidence gaps listed, approvals named. Verdict `READY` or
+`NOT READY`. A mismatch is a finding — adjust plan/manifest or record a
+justified reclassification. Never fix code or approve risk in preflight.
 
 ## Artifacts
 
