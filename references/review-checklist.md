@@ -35,7 +35,7 @@ $query
 
 ## 3. No `else` `[BLOCKING]`
 
-- [ ] No changed production file contains `else`, `elseif`, `v-else`, `v-else-if`?
+- [ ] No new `else`/`elseif`/`v-else`/`v-else-if` introduced; directly-relevant pre-existing ones in touched code refactored?
 - [ ] Directly-relevant pre-existing branches in touched code refactored preserving order and side effects; wider cleanup split into its own task?
 
 ## 4. Performance and composition `[TARGET]`

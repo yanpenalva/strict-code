@@ -23,10 +23,10 @@ public function register(array $data): User
 }
 
 // RIGHT — orchestrate collaborators, each with one job
-public function register(array $data): User
+public function register(array $input): User
 {
-    $this->validator->assertValid($data);
-    $user = $this->users->create($data);
+    $this->validator->assertValid($input);
+    $user = $this->users->create($input);
     $this->notifier->welcome($user);
     return $user;
 }

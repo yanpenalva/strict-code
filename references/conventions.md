@@ -2,7 +2,7 @@
 
 ## Naming
 
-Naming follows `style.md` (PascalCase classes/components, camelCase members, SCREAMING_SNAKE_CASE constants, snake_case data). Database additions: plural snake_case tables; property casing follows mapping (camelCase internal, snake_case DB).
+Naming: `style.md` is the sole owner. Database additions only: plural snake_case tables; column `comment` per migrations below.
 
 Generic names (`$data`, `$x`, `get()`, `process()`) fail review — names
 carry intent. Exception: `$q`/`$query` in `when()` closures. Class
@@ -34,8 +34,7 @@ Messages validated in the `commit-msg` hook (commitlint).
 ## Modern PHP (full catalog in `modern-php.md`; project version gates every feature)
 
 Kept here (not duplicated elsewhere):
-- `extract()`, `$$var`, `goto`, `&$var` references without justification: forbidden.
-- Always `===`/`!==`; money never as float (minor-unit integer or decimal string).
+- Comparisons always `===`/`!==`. (Hard prohibitions — `extract()`, `$$var`, `goto`, float money — live in `security.md`; not repeated here.)
 
 ## JS/TS/Vue (full rules in `frontend.md` and `style.md`; not duplicated here)
 

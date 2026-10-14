@@ -5,8 +5,8 @@ development iterations; 1.0.0 is the first stable release.
 
 ## 1.0.0
 
-- Stable release: 35 guides/refs, en-US throughout, audited twice (sol medium
-  executor + sol low reviewer) with all confirmed blocking findings fixed.
+- Stable release: 30 reference guides, en-US throughout, audited twice (sol
+  medium executor + sol low reviewer); re-audit residuals fixed in follow-ups.
 
 ## 0.9.x
 

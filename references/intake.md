@@ -61,6 +61,7 @@ policy never needs its full document in every phase.
 first match:
 
 ```text
+0. confidence = low → floor at standard: never derive minimal on low confidence; gather evidence and re-derive
 1. complexity = high OR risk in {high, critical}
    OR impact in {cross-module, system} OR security = sensitive → extended
 2. complexity = low AND risk = low AND impact = local

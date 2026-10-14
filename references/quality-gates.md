@@ -40,9 +40,7 @@ Example: `[BLOCKING] method 172 lines (ceiling 150) — auth/LoginService.php:40
 ## Enforcement procedure
 
 1. Measure changed production files only (`changed_files`; empty list = error).
-2. IF any ceiling is met or exceeded THEN decompose in the same task: split into
-   validation, lookup, transformation, persistence, and response construction
-   (cohesive private methods or dedicated collaborators). Exceeding fails the gate outright.
+2. IF any ceiling is EXCEEDED → gate fails; decompose in the same task (split validation/lookup/transformation/persistence/response). IF exactly AT a ceiling → ships, but splitting is mandatory before any further addition to that unit.
 3. IF decomposition would create greater risk THEN record an approved, scoped
    exception (reason + expiry) — the only way to ship above a ceiling.
 4. NEVER evade a ceiling with trivial wrappers, fragmented files, or metric-only
