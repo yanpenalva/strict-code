@@ -1,6 +1,6 @@
 ---
 name: strict-code
-description: Use when writing or reviewing code for Yan's projects.
+description: Use for any software task: write, review, test, plan code.
 version: 1.0.0
 author: Yan Penalva, Hermes Agent
 license: MIT
