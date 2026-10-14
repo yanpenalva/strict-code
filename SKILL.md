@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: Use when writing or reviewing code for Yan's projects.
-version: 0.4.0
+version: 0.5.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -41,24 +41,38 @@ unless the work spec records an exception.
   lines/method, 3 returns, 7 params, cyclomatic ≤10 / cognitive ≤15
   (`quality-gates.md`). Target: <30 lines; extraction candidate >50.
 - Layers: thin controller, rules in service, queries in repository, validation
-  in FormRequest, shape in Resource (`patterns.md`).
+  in FormRequest, shape in Resource (`patterns.md`, `laravel.md`).
+- SOLID with one reason to change per class; no god services (`solid.md`,
+  `anti-patterns.md`).
 - Sanitized logs; authorization follows the route's explicit contract (`security.md`).
 - Every behavior change gets a focused test; 80% target on new code
   (`testing.md`, `workflow.md`).
+- API responses follow the standard envelope with semantic status codes
+  (`api-contracts.md`).
 - Conventional Commits + hooks; merge/PR only with explicit approval (`conventions.md`).
+- Work enters through intake/classification/routing before specifying (`intake.md`)
+  and flows through the delivery stages to a criteria-checked close (`delivery.md`).
 - Reviews close with `file:line` + severity + verdict (`review-checklist.md`).
 
 ## Guides
 
 | Need | Read |
 |---|---|
-| Style, typing, naming, limits | `references/style.md` |
+| Style, typing, naming | `references/style.md` |
+| SOLID with examples | `references/solid.md` |
+| Modern PHP features | `references/modern-php.md` |
+| Laravel specifics | `references/laravel.md` |
+| Anti-patterns and fixes | `references/anti-patterns.md` |
 | Layer patterns, queries, exceptions, compat | `references/patterns.md` |
 | Numeric gates, Sonar, hotspots | `references/quality-gates.md` |
 | Commits, hooks, toolchain, migrations | `references/conventions.md` |
 | Security and privacy | `references/security.md` |
+| API envelope, status codes, masking | `references/api-contracts.md` |
 | Test strategy and anatomy | `references/testing.md` |
-| Work process | `references/workflow.md` |
+| Vue frontend specifics | `references/frontend.md` |
+| Intake, classification, routing | `references/intake.md` |
+| Delivery stages and closing | `references/delivery.md` |
+| Work process summary | `references/workflow.md` |
 | Review checklist | `references/review-checklist.md` |
 
 ## Pitfalls
