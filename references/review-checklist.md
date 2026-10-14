@@ -105,3 +105,9 @@ $query
 
 - [ ] Owning module/domain updated (endpoints, rules, events, configs)?
 - [ ] Official docs consulted for non-trivial types/functions?
+
+## 14. Structural navigation `[TARGET]`
+
+- [ ] Impact analysis via structural navigation (call graph/index) before
+  broad text search?
+- [ ] Findings cite structural evidence, not grep absence?

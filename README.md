@@ -20,3 +20,7 @@ TypeScript/JavaScript/Vue). All contents in en-US.
 - `references/delivery.md` — stages, artifacts, waves, handoffs, closing criteria.
 - `references/workflow.md` — task order, scope, Git, documentation.
 - `references/review-checklist.md` — mandatory review checklist with severities.
+- `references/artifact-templates.md` — spec/review/progress/manifest shapes.
+- `references/agent-comms.md` — dense communication + prompt/handoff shapes.
+- `references/architecture-decisions.md` — ADR practice + stack checklist.
+- `references/module-docs.md` — domain documentation standard.

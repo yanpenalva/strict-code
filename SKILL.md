@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: Use when writing or reviewing code for Yan's projects.
-version: 0.5.0
+version: 0.6.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -74,6 +74,10 @@ unless the work spec records an exception.
 | Delivery stages and closing | `references/delivery.md` |
 | Work process summary | `references/workflow.md` |
 | Review checklist | `references/review-checklist.md` |
+| Artifact templates | `references/artifact-templates.md` |
+| Agent communication | `references/agent-comms.md` |
+| Architecture decisions | `references/architecture-decisions.md` |
+| Module documentation | `references/module-docs.md` |
 
 ## Pitfalls
 

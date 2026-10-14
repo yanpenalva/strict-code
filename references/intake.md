@@ -37,7 +37,24 @@ rest deferred. A route is a depth contract, not permission to skip gates.
 Re-run classification when scope, impact, security, dependencies, or rollback
 risk materially change. Record the evidence and the newly promoted domains.
 
-## 5. Questions and escalation
+## 5. Context budgets
+
+Budgets cap REQUIRED domains per route (bootstrap + front-door contracts sit
+outside the cap; unused capacity never justifies loading more):
+
+| Route | Max required domains | Use |
+|---|---|---|
+| `minimal` | 3 | docs or local reversible change |
+| `standard` | 5 | normal implementation or bugfix |
+| `extended` | 7 | cross-module, sensitive, production, high-risk |
+
+Invariants: required and deferred stay disjoint; a domain is required only
+when promoted by phase, trigger, classification, or explicit human request;
+`testing` promotes before validation, `security` for sensitive changes,
+`architecture` for cross-module/system or persistence impact. A mandatory
+policy never needs its full document in every phase.
+
+## 6. Questions and escalation
 
 - Inspect discoverable facts first (repo, tracker, existing artifacts).
 - Decide reversible matters locally; record allowed assumptions.
