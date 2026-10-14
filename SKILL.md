@@ -1,7 +1,7 @@
 ---
 name: code-standards
 description: Use when writing or reviewing code for Yan's projects.
-version: 0.3.0
+version: 0.4.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -13,66 +13,66 @@ metadata:
 
 # Code Standards
 
-Padrões obrigatórios de escrita e revisão de código. Valem em todo projeto,
-salvo regra contrária registrada no spec do trabalho.
+Mandatory code writing and review standards. They apply to every project
+unless the work spec records an exception.
 
 ## When to Use
 
-- Escrever, refatorar ou revisar código PHP/Laravel e TypeScript/JavaScript/Vue.
-- Pull requests, testes, migrations, commits, auditoria de código.
-- Não usar para: documentação sem código; decisão de produto (decisão é humana).
+- Write, refactor, or review PHP/Laravel and TypeScript/JavaScript/Vue code.
+- Pull requests, tests, migrations, commits, code audits.
+- Do not use for: documentation without code; product decisions (humans decide).
 
-## Princípios
+## Principles
 
-- KISS/YAGNI: a menor solução funcional. Sem abstração antecipada, sem código
-  morto, sem comportamento fora do escopo aprovado.
-- Mudança pequena, localizada e reversível. Sem refator oportunista fora do escopo.
-- Desconhecido registra-se `NOT FOUND`; nunca inventar requisito, contrato ou evidência.
-- Nunca alegar validação ou sucesso sem rodar o comando correspondente.
+- KISS/YAGNI: the smallest working solution. No speculative abstraction, no
+  dead code, no behavior outside the approved scope.
+- Small, localized, reversible changes. No opportunistic refactoring outside scope.
+- Record unknowns as `NOT FOUND`; never invent requirements, contracts, or evidence.
+- Never claim validation or success without running the corresponding command.
 
-## Regras nucleares
+## Core rules
 
-- Sem `else`, `elseif`, `v-else`, `v-else-if`: guard clauses, early return,
-  `match`, `computed` ou fluxo linear equivalente (`style.md`).
-- Strings por interpolação; SQL só com parameter binding (`style.md`).
-- PHP com namespace importa nativas com `use function <nome>;` (`style.md`).
-- Tipagem completa + `strict_types = 1`; enums para conjuntos fechados (`style.md`).
-- Tetos bloqueantes: 500 linhas/arquivo, 15 métodos/funções, 150 linhas/método,
-  3 returns, 7 params, complexidade ciclomática ≤10 / cognitiva ≤15
-  (`quality-gates.md`). Alvo: <30 linhas; >50 candidatar extração.
-- Camadas: controller fino, regra no service, query no repository, validação no
-  FormRequest, formato no Resource (`patterns.md`).
-- Logs sanitizados; authZ pelo contrato explícito da rota (`security.md`).
-- Toda mudança de comportamento tem teste focado; alvo 80% no código novo
+- No `else`, `elseif`, `v-else`, `v-else-if`: guard clauses, early return,
+  `match`, `computed`, or equivalent linear flow (`style.md`).
+- Strings via interpolation; SQL only with parameter binding (`style.md`).
+- Namespaced PHP imports natives with `use function <name>;` (`style.md`).
+- Full typing + `strict_types = 1`; enums for closed sets (`style.md`).
+- Blocking ceilings: 500 lines/file, 15 declared methods/functions, 150
+  lines/method, 3 returns, 7 params, cyclomatic ≤10 / cognitive ≤15
+  (`quality-gates.md`). Target: <30 lines; extraction candidate >50.
+- Layers: thin controller, rules in service, queries in repository, validation
+  in FormRequest, shape in Resource (`patterns.md`).
+- Sanitized logs; authorization follows the route's explicit contract (`security.md`).
+- Every behavior change gets a focused test; 80% target on new code
   (`testing.md`, `workflow.md`).
-- Conventional Commits + hooks; merge/PR só com OK explícito (`conventions.md`).
-- Revisão fecha com `file:line` + severidade + veredito (`review-checklist.md`).
+- Conventional Commits + hooks; merge/PR only with explicit approval (`conventions.md`).
+- Reviews close with `file:line` + severity + verdict (`review-checklist.md`).
 
-## Guias
+## Guides
 
-| Precisa de | Leia |
+| Need | Read |
 |---|---|
-| Estilo, tipagem, nomenclatura, limites | `references/style.md` |
-| Padrões de camada, queries, exceções, compat | `references/patterns.md` |
-| Gates numéricos, Sonar, hotspots | `references/quality-gates.md` |
+| Style, typing, naming, limits | `references/style.md` |
+| Layer patterns, queries, exceptions, compat | `references/patterns.md` |
+| Numeric gates, Sonar, hotspots | `references/quality-gates.md` |
 | Commits, hooks, toolchain, migrations | `references/conventions.md` |
-| Segurança e privacidade | `references/security.md` |
-| Estratégia e anatomia de testes | `references/testing.md` |
-| Processo do trabalho | `references/workflow.md` |
-| Checklist de revisão | `references/review-checklist.md` |
+| Security and privacy | `references/security.md` |
+| Test strategy and anatomy | `references/testing.md` |
+| Work process | `references/workflow.md` |
+| Review checklist | `references/review-checklist.md` |
 
 ## Pitfalls
 
-- Ausência de executável/CI num recorte só de docs é limite do recorte, não
-  falha do padrão; contradição entre documentos presentes é falha real.
-- `allow_failure: true` no CI não dispensa gate verde na revisão.
-- Validação de manifesto de contexto não comprova qualidade do código.
-- Spec desatualizada contra manifesto: sincronizar a spec.
-- Supressão de alerta de analisador (`NOSONAR` e equivalentes) só com motivo
-  técnico + referência do trabalho; revisar supressões antigas.
+- A docs-only slice missing executables/CI is a slice limitation, not a
+  standard failure; contradictions between present documents are real failures.
+- CI `allow_failure: true` never waives a green review gate.
+- Context-manifest validation never proves code quality.
+- Stale spec vs manifest: synchronize the spec.
+- Analyzer suppressions (`NOSONAR` or equivalent) only with a technical reason
+  + work reference; review old suppressions.
 
 ## Verification
 
-- Gates rodados no escopo alterado, com comando, resultado e cobertura afetada.
-- Entrega cita `file:line` por achado e fecha com veredito + contagem
-  (bloqueantes / não-bloqueantes).
+- Gates run on the changed scope, with command, result, and affected coverage.
+- Deliveries cite `file:line` per finding and close with a verdict + count
+  (blocking / non-blocking).

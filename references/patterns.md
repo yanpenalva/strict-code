@@ -1,73 +1,73 @@
-# Padrões de arquitetura e design
+# Architecture and design patterns
 
-Fronteiras e padrões para backend Laravel/PHP e frontend Vue/TS.
+Boundaries and patterns for Laravel/PHP backends and Vue/TS frontends.
 
-## Fronteiras de camada (backend)
+## Layer boundaries (backend)
 
-- Controller: recebe input validado, autoriza, chama um service, mapeia resposta.
-  Sem regra de negócio, sem query, sem validação inline.
-- Service: centraliza regras, orquestra repositories/transações/colaboradores.
-  Dependências via construtor (`private readonly`), uma responsabilidade clara.
-- Repository: dono da composição de queries e persistência; exposto por interface.
-- FormRequest: dono da validação HTTP (regras + mensagens); injetado no controller.
-- Resource: dono do formato da resposta; serialização não vaza Eloquent.
-- Não criar padrão novo sem necessidade concreta registrada no spec.
+- Controller: takes validated input, authorizes, calls one service, maps the
+  response. No business rules, no queries, no inline validation.
+- Service: owns rules and orchestrates repositories/transactions/collaborators.
+  Constructor dependencies (`private readonly`), one clear responsibility.
+- Repository: owns query composition and persistence details, exposed via interface.
+- FormRequest: owns HTTP validation (rules + messages); injected into the controller.
+- Resource: owns response shape; persistence models never leak into serialization.
+- Never introduce a new pattern without a concrete need recorded in the spec.
 
-## Máquina de estados (FSM)
+## Finite state machines
 
-- Entidades com ciclo de vida (status + transições + ações) usam configuração
-  declarativa de workflow + service de domínio que calcula ações disponíveis,
-  aplica a transição e registra histórico.
-- Frontend consome ações disponíveis da API e renderiza a partir delas; nunca
-  hardcode transições válidas no template.
+- Entities with lifecycles (status + transitions + actions) use declarative
+  workflow configuration + a domain service that computes available actions,
+  applies transitions, and records history.
+- Frontends render from API-provided available actions; never hardcode valid
+  transitions in templates.
 
-## Autorização
+## Authorization
 
-- Middleware de permissão + policies + checagens de service consistentes entre si
-  para o mesmo contrato de rota; exceção (rota pública, heartbeat) documentada
-  no contrato — checklist genérico nunca veta exceção documentada.
+- Permission middleware + policies + service checks must agree on the same
+  route contract; exceptions (public route, heartbeat) are documented in the
+  contract — a generic checklist never vetoes a documented exception.
 
-## Auditoria e soft-delete
+## Auditing and soft-deletes
 
-- Modelos sensíveis: soft-delete + trilha de auditoria (quem, o quê, quando).
-  Retenção e imutabilidade definidas no spec.
+- Sensitive models: soft-delete + audit trail (who, what, when). Retention and
+  immutability defined in the spec.
 
-## Exceções
+## Exceptions
 
-- Capturar tipos específicos; nunca `catch` amplo sem relançar/embrulhar com
-  causa preservada (`previous`). Nunca `catch` vazio, nunca `@`, nunca engolir
-  falha com `return false` sem justificativa.
-- Falha de consistência com significado de domínio vira exceção tipada de
-  domínio + teste unitário, não exceção genérica.
+- Catch specific types; never a broad catch without rethrowing/wrapping with
+  the preserved cause (`previous`). No empty catches, no `@`, no swallowing
+  failures with `return false` without justification.
+- Consistency failures with domain meaning become typed domain exceptions +
+  unit tests, not generic runtime exceptions.
 
-## Queries e persistência
+## Queries and persistence
 
-- Sem N+1, sem query em loop, sem `select *`: eager loading, seleção explícita,
-  `chunk`/`cursor`/`lazy` para volume.
-- Escritas relacionadas em transação; todo endpoint de listagem pagina — nunca
-  resultado ilimitado; cache em leitura repetida/pesada.
-- Migrações retrocompatíveis (nullable ou default); coluna nova/alterada com
-  `comment` em PT-BR (propósito + domínio/valores + nulabilidade/regra).
+- No N+1, no queries in loops, no `select *`: eager loading, explicit selects,
+  `chunk`/`cursor`/`lazy` for volume.
+- Related writes in transactions; every listing endpoint paginates — never
+  unbounded result sets; cache repeated/heavy reads.
+- Backward-compatible migrations (nullable or default); new/altered columns
+  carry `comment` (purpose + domain/values + nullability/rule).
 
-## Coleções e nulos
+## Collections and nulls
 
-- Collection para pipeline de transformação; `foreach` para iteração simples,
-  performance crítica ou mutação pontual. Sem cadeia `map/filter/reduce` onde
-  um loop resolve.
-- Nulos em ordem: `??`, `??=`, `?->`, acesso seguro do framework; sem corrente
-  de `isset` nem `if ($o && $o->x)` gigante. Ausência de dado obrigatório nunca
-  vira fallback silencioso "válido".
+- Collection for transformation pipelines; `foreach` for plain iteration,
+  critical performance, or focused mutation. No `map/filter/reduce` chains
+  where one loop suffices.
+- Nulls in order: `??`, `??=`, `?->`, framework safe access; no `isset` chains
+  or giant `$o && $o->x` guards. Missing required data never becomes a silent
+  valid-looking fallback.
 
 ## Frontend
 
-- Componente apresenta e orquestra (props, emits, loading, erro); regra e estado
-  reutilizável vivem em services, composables ou tipos de domínio.
-- Reutilizar componente existente antes de criar novo; template legível com
-  `computed`, sem lógica extensa inline.
+- Components present and orchestrate (props, emits, loading, error); reusable
+  rules and state live in services, composables, or domain types.
+- Reuse an existing component before creating one; readable templates with
+  `computed`, no extensive inline logic.
 
-## Compatibilidade
+## Compatibility
 
-- Mudança de interface/contrato não quebra implementação existente: parâmetro
-  novo com default, migração compatível, rota nova sem conflito.
-- Boolean que alterna o comportamento inteiro do método é proibido: separar
-  operações ou usar variante tipada fechada.
+- Contract changes break no existing implementation: new parameters defaulted,
+  compatible migrations, conflict-free new routes.
+- Booleans switching a whole method behavior are forbidden: split operations
+  or use a closed typed variant.

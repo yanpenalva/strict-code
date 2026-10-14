@@ -1,57 +1,55 @@
-# Estratégia de testes
+# Test strategy
 
-Menor conjunto que prova o comportamento alterado + regressão exigida da área.
+The smallest set proving the changed behavior + the area's required regression.
 
-## Camadas
+## Layers
 
-| Camada | Local típico | Uso |
+| Layer | Typical location | Use |
 |---|---|---|
-| Service | `tests/Unit/Services/` | regra de negócio com doubles de interface |
-| Repository | `tests/Unit/Repositories/` | query/persistência contra banco de teste |
-| Controller | `tests/Unit/Http/Controllers/` | delegação e mapeamento de resposta |
-| FormRequest | `tests/Unit/Http/Requests/` | regras via validador real (stub local p/ injeção) |
-| Model | `tests/Unit/Models/` | relação, cast, fillable, soft-delete |
-| Feature HTTP | `tests/Feature/` | rota, middleware, authZ, serialização |
-| Feature console | `tests/Feature/Console/` | comando: saída, exit code, efeitos |
-| Frontend | `*.spec.ts` junto ao fonte | componente/composable/service com HTTP mockado |
+| Service | `tests/Unit/Services/` | business rules with interface doubles |
+| Repository | `tests/Unit/Repositories/` | queries/persistence against test DB |
+| Controller | `tests/Unit/Http/Controllers/` | delegation and response mapping |
+| FormRequest | `tests/Unit/Http/Requests/` | rules through the real validator (local stub for injection) |
+| Model | `tests/Unit/Models/` | relations, casts, fillable, soft-delete |
+| Feature HTTP | `tests/Feature/` | routes, middleware, authZ, serialization |
+| Feature console | `tests/Feature/Console/` | command: output, exit code, side effects |
+| Frontend | `*.spec.ts` next to source | component/composable/service with mocked HTTP |
 
-Mudança de autorização/rota pede feature; regra de service pede unit focado.
+Authorization/route changes need feature tests; service rules need focused unit.
 
-## Anatomia por camada
+## Anatomy per layer
 
-- **Service:** mock da interface do repository, injeção por construtor, um
-  comportamento por teste incluindo falha.
-- **Repository:** refresh de banco + factories + persistência real; assert no
-  resultado e no estado.
-- **Controller:** mock do service, stub local de FormRequest, assert no mapeamento.
-- **FormRequest:** request real, `rules()` pelo validador: válido, ausente,
-  tipo errado, nullable.
-- **Feature HTTP:** pela rota quando middleware/permissão/status/serialização
-  são o contrato; auth e authZ assertados separadamente.
+- **Service:** mock the repository interface, constructor injection, one
+  behavior per test including failure paths.
+- **Repository:** DB refresh + factories + real persistence; assert result and state.
+- **Controller:** mock the service, local FormRequest stub, assert mapping.
+- **FormRequest:** real request, `rules()` through the validator: valid,
+  missing, wrong type, nullable.
+- **Feature HTTP:** through the route when middleware/permission/status/
+  serialization are the contract; auth and authZ asserted separately.
 
-## Convenções
+## Conventions
 
-- Nome de teste = comportamento + cenário; assertions específicas (`assertSame`,
-  `assertCount`, `assertDatabaseHas`, asserts de status HTTP).
-- Sucesso + falhas de auth/validação + edge relevantes; sem testar método
-  privado diretamente.
-- Factories e states em vez de montar model na mão; nunca mockar Eloquent
-  quando o comportamento depende de persistência.
-- Front: HTTP mockado, sem endpoint real, sem sleep arbitrário nem assert
-  dependente de timing.
-- Query dependente de comportamento específico do driver de produção: cobrir em
-  ambiente com o driver ou caminho equivalente significativo — nunca enfraquecer
-  o teste para fazer query incompatível passar.
+- Test names = behavior + scenario; specific assertions (`assertSame`,
+  `assertCount`, `assertDatabaseHas`, HTTP status asserts).
+- Success + auth/validation failures + relevant edges; never test private
+  methods directly.
+- Factories and states over hand-built models; never mock Eloquent when
+  behavior depends on persistence.
+- Front: mocked HTTP, no real endpoints, no arbitrary sleeps, no
+  timing-dependent asserts.
+- Driver-specific queries: cover on the production driver or a meaningful
+  equivalent path — never weaken a test to make an incompatible query pass.
 
-## O que não testar por padrão
+## What not to test by default
 
-- Comportamento do framework (getter/setter trivial), privado isolado, config
-  fora do escopo, suíte inteira para mudança localizada.
-- Exceção: quando rota, config ou integração É o contrato alterado ou a
-  fronteira provável de regressão.
+- Framework behavior (trivial getters/setters), privates in isolation, config
+  outside scope, the whole suite for a localized change.
+- Exception: when a route, config, or integration IS the changed contract or
+  the likely regression boundary.
 
-## Registro de conclusão
+## Completion record
 
-Todo relatório final declara: testes focados + regressão rodada; análise
-estática/formatação/typecheck/lint rodados; ambiente/container; passa-falha
-com asserts/cobertura; falha pré-existente ou pendente.
+Every final report states: focused + regression tests run; static
+analysis/format/typecheck/lint run; environment/container; pass/fail with
+asserts/coverage; pre-existing or pending failures.

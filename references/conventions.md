@@ -1,71 +1,69 @@
-# Convenções
+# Conventions
 
-## Nomenclatura
+## Naming
 
-| Camada | Padrão | Exemplo |
+| Layer | Standard | Example |
 |---|---|---|
 | Classes, interfaces | PascalCase | `InvoiceService`, `InvoiceRepositoryInterface` |
-| Métodos, funções, vars | camelCase | `issueInvoice`, `dueDate` |
-| Constantes | SCREAMING_SNAKE_CASE (tipadas quando possível) | `MAX_ITEMS` |
-| Colunas e tabelas | snake_case (tabela no plural) | `due_date`, `invoice_status_histories` |
-| Componentes Vue (arquivo + template) | PascalCase | `InvoiceList.vue` |
-| Constantes/enums globais (front) | SCREAMING_SNAKE_CASE ou PascalCase | `SCREENS`, `ACTIONS` |
+| Methods, functions, vars | camelCase | `issueInvoice`, `dueDate` |
+| Constants | SCREAMING_SNAKE_CASE, typed when possible | `MAX_ITEMS` |
+| Columns and tables | snake_case (plural tables) | `due_date`, `invoice_status_histories` |
+| Vue components (file + template) | PascalCase | `InvoiceList.vue` |
+| Global front constants/enums | SCREAMING_SNAKE_CASE or PascalCase | `SCREENS`, `ACTIONS` |
 
-Nomes genéricos (`$dados`, `$x`, `get()`, `process()`) são falha de revisão —
-o nome documenta a intenção. Exceção: `$q`/`$query` em closures de `when()`.
-Propriedade de classe: camelCase interno, snake_case em mapeamento de banco.
+Generic names (`$data`, `$x`, `get()`, `process()`) fail review — names
+carry intent. Exception: `$q`/`$query` in `when()` closures. Class
+properties: camelCase internally, snake_case for DB mapping.
 
 ## Commits
 
-Formato: `tipo: descrição` ou `tipo(escopo): descrição`. Tipos: `build`,
+Format: `type: description` or `type(scope): description`. Types: `build`,
 `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`, `revert`, `style`, `test`.
-Mensagem validada no hook `commit-msg` (commitlint).
+Messages validated in the `commit-msg` hook (commitlint).
 
-## Hooks (sugerido)
+## Hooks (recommended)
 
-- `pre-commit`: lint-staged (ESLint com autofix no front, Pint no back).
-- `pre-push`: quality check dos arquivos alterados + typecheck do front quando
-  aplicável + PHPStan/testes focados no back. Suíte completa só em mudança de
-  dependência ou runner.
+- `pre-commit`: lint-staged (ESLint with autofix on front, Pint on back).
+- `pre-push`: changed-file quality check + front typecheck when applicable +
+  focused back PHPStan/tests. Full suites only on dependency or runner changes.
 
-## Toolchain de referência
+## Reference toolchain
 
-| Área | Ferramenta | Papel |
+| Area | Tool | Role |
 |---|---|---|
-| PHP formatação | Pint (PSR-12/Laravel) | formatar |
-| PHP análise | PHPStan/Larastan (+ baseline p/ débito existente) | tipos/bugs |
-| PHP testes | PHPUnit/ParaTest | unidade/integração |
-| Front lint | ESLint | estilo/boas práticas |
-| Front formato | Prettier | formatação |
-| Front testes | Vitest (+ coverage) | unidade/componente |
+| PHP formatting | Pint (PSR-12/Laravel) | format |
+| PHP analysis | PHPStan/Larastan (+ baseline for existing debt) | types/bugs |
+| PHP tests | PHPUnit/ParaTest | unit/integration |
+| Front lint | ESLint | style/practices |
+| Front format | Prettier | formatting |
+| Front tests | Vitest (+ coverage) | unit/component |
 
-## PHP moderno (usar quando a versão do projeto suporta)
+## Modern PHP (use when the project version supports it)
 
-- `final class` por padrão; `private readonly` + promoção no construtor;
-  `match` em vez de `elseif`; enums backed para conjuntos fechados;
-  `#[Override]`; constantes tipadas; `array_find/any/all`; `json_validate()`;
-  `mb_*`; named arguments (3+ params); spread `[...$a, ...$b]` para mesclar;
-  `Response::HTTP_*` em vez de número mágico; `when()` em queries/collections.
-- `extract()`, `$$var`, `goto`, referência `&$var` sem justificativa: proibidos.
-- Comparação sempre `===`/`!==`; dinheiro nunca em float (inteiro menor unidade
-  ou decimal string).
+- `final class` by default; `private readonly` + constructor promotion;
+  `match` over `elseif`; backed enums for closed sets; `#[Override]`; typed
+  constants; `array_find/any/all`; `json_validate()`; `mb_*`; named arguments
+  (3+ params); spread `[...$a, ...$b]` for merges; `Response::HTTP_*` instead
+  of magic numbers; `when()` on queries/collections.
+- `extract()`, `$$var`, `goto`, `&$var` references without justification: forbidden.
+- Always `===`/`!==`; money never as float (minor-unit integer or decimal string).
 
 ## JS/TS/Vue
 
-- `const` por padrão, `let` só com reatribuição, nunca `var`; `===`, `??`, `?.`.
-- TS: sem `any` (tipo preciso ou `unknown`), sem `!` non-null, strict null checks,
-  `satisfies` para estreitar literais; `async/await`, sem promise hell.
-- Vue: Composition API + `<script setup lang="ts">`; props/emits tipados;
-  `:key` em todo `v-for`; sem mutar prop; sem `v-html` com conteúdo não
-  sanitizado; watchers profundos só com motivo.
+- `const` by default, `let` only with reassignment, never `var`; `===`, `??`, `?.`.
+- TS: no `any` (precise type or `unknown`), no non-null `!`, strict null checks,
+  `satisfies` to narrow literals; `async/await`, no promise hell.
+- Vue: Composition API + `<script setup lang="ts">`; typed props/emits;
+  `:key` on every `v-for`; no prop mutation; no `v-html` with unsanitized
+  content; deep watchers only with reason.
 
 ## Migrations
 
-- Retrocompatíveis; `change()` redeclara definição completa + `comment`.
-- `->comment()` em PT-BR: propósito + domínio/valores + nulabilidade/regra.
+- Backward compatible; `change()` redeclares the full definition + `comment`.
+- `->comment()`: purpose + domain/values + nullability/rule.
 
-## Documentação oficial
+## Official documentation
 
-- Tipo/função/recurso desconhecido: consultar a doc oficial (via Context7 quando
-  disponível) antes de implementar; se desatualizada, complementar com a doc
-  oficial atual no browser. Pacotes: repositório/packagist.
+- Unknown type/function/feature: consult official docs (via Context7 when
+  available) before implementing; if stale, complement with current official
+  docs in the browser. Packages: repository/packagist.

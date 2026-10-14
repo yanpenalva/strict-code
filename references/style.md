@@ -1,117 +1,110 @@
-# Guia de estilo
+# Style guide
 
-Detalhamento das regras de escrita: padrão, anti-padrão e porquê.
+Writing rules in detail: pattern, anti-pattern, and why.
 
 ## KISS / YAGNI
 
-- Implementar só o comportamento aprovado; abstração (interface, parâmetro,
-  camada) entra no segundo caso real, nunca antes.
-- Apagar código morto no trabalho que o revela; sem "para o futuro".
-- Extrair abstração só com repetição real de regra com um dono — nunca para
-  baixar métrica; não fragmentar em wrappers triviais para driblar teto.
+- Implement only approved behavior; abstraction (interface, parameter, layer)
+  enters on the second real case, never before.
+- Delete dead code in the task that reveals it; nothing "for the future".
+- Extract an abstraction only for real repetition of one-owned rules — never to
+  lower a metric; no trivial wrappers or fragmented files to dodge ceilings.
 
-## Sem `else` / `elseif`
+## No `else` / `elseif`
 
-Fluxo linear com saída antecipada. Vale para PHP, TS/JS e templates Vue
-(`v-else`, `v-else-if` na mesma proibição).
+Linear flow with early exits. Applies to PHP, TS/JS, and Vue templates
+(`v-else`, `v-else-if` under the same ban).
 
 ```php
-// NÃO
+// WRONG
 function status(int $score): string {
     if ($score >= 7) {
-        return 'aprovado';
+        return 'approved';
     } else {
-        return 'reprovado';
+        return 'rejected';
     }
 }
 
-// SIM
+// RIGHT
 function status(int $score): string {
     if ($score < 7) {
-        return 'reprovado';
+        return 'rejected';
     }
-    return 'aprovado';
+    return 'approved';
 }
 ```
 
-Ramificações finitas usam `match`; decisões complexas viram predicados
-nomeados ou colaborador dedicado. Proibido trocar `else` por ternário aninhado
-ou pirâmide de `if` — no máximo 3 níveis significativos, alvo 1.
+Finite dispatch uses `match`; complex decisions become named predicates or a
+dedicated collaborator. Never swap `else` for nested ternaries or `if`
+pyramids — at most 3 meaningful levels, target 1.
 
-## Strings: interpolação, nunca concatenação
+## Strings: interpolation, never concatenation
 
 ```php
-// NÃO
-$msg = 'Usuário ' . $nome . ' criado em ' . $data;
+// WRONG
+$msg = 'User ' . $name . ' created at ' . $date;
 
-// SIM
-$msg = "Usuário {$nome} criado em {$data}";
+// RIGHT
+$msg = "User {$name} created at {$date}";
 ```
 
 ```ts
-// NÃO
-const msg = 'Usuário ' + nome + ' criado';
+// WRONG
+const msg = 'User ' + name + ' created';
 
-// SIM
-const msg = `Usuário ${nome} criado`;
+// RIGHT
+const msg = `User ${name} created`;
 ```
 
-Mensagens de exceção, logs, chaves de tradução, URLs e chaves de array:
-interpolação. Query: sempre parameter binding — interpolar valor em SQL é
-falha de segurança, não de estilo.
+Exception messages, logs, translation keys, assembled URLs, and array keys:
+interpolation. Queries: always parameter binding — interpolating a value into
+SQL is a security failure, not a style one.
 
-## Funções nativas e callbacks
+## Native functions and callbacks
 
-- PHP com namespace importa nativas: `use function sprintf;`,
-  `use function in_array;`, `use function count;` (resolução global +
-  otimização do compilador; sem prefixo `\` inline).
-- Não usar `require_once` para carregar configuração de código namespaced —
-  usar o mecanismo de config do framework.
-- Callbacks/handlers locais como arrow functions (`fn() =>`, `(x) =>`);
-  `function` só onde a linguagem/framework exige.
-- Ternário aninhado: extrair para statements nomeados; parêntese redundante
-  em cast/coalescência: remover; parâmetro não usado: remover com callers.
+- Namespaced PHP imports natives: `use function sprintf;`,
+  `use function in_array;`, `use function count;` (global resolution +
+  compiler optimization; no inline `\` prefixes).
+- Never `require_once` application config from namespaced production code —
+  use the framework's config mechanism.
+- Local callbacks/handlers as arrow functions (`fn() =>`, `(x) =>`);
+  `function` only where the language/framework requires it.
+- Nested ternaries: extract into named statements; redundant parentheses around
+  casts/coalescing: remove; unused parameter: remove with its callers.
 
-## Tipagem
+## Typing
 
-- `declare(strict_types=1);` em todo PHP; tipos em parâmetros, retornos e
-  propriedades; `mixed` só com justificativa; PHPDoc só para generics,
-  collections, arrays complexos e contratos inexprimíveis — sem duplicar a
-  assinatura.
-- TS/Vue: sem `any` (preciso ou `unknown`), sem `!`, strict null checks,
-  `satisfies` para literais; tipos nos limites públicos (props, emits, API).
-- Conjuntos fechados: enum (backed quando há valor); resto: constante tipada
-  ou value object. Nunca número/string mágica espalhada.
-- Dependências via construtor (`private readonly` + promoção), imutáveis onde
-  couber; estático com dependência: proibido — injetar.
-- `final class` por padrão; extensão só com motivo documentado.
+- `declare(strict_types=1);` in every PHP file; typed parameters, returns, and
+  properties; `mixed` only with justification; PHPDoc only for generics,
+  collections, complex arrays, and inexpressible contracts — never duplicating
+  the signature.
+- TS/Vue: no `any` (precise type or `unknown`), no `!`, strict null checks,
+  `satisfies` for literals; types on public boundaries (props, emits, APIs).
+- Closed sets: enum (backed when values exist); otherwise typed constant or
+  value object. Never scattered magic numbers/strings.
+- Constructor dependencies (`private readonly` + promotion), immutable where
+  applicable; statics with dependencies forbidden — inject instead.
+- `final class` by default; extension only with a documented reason.
 
-## Nomenclatura
+## Naming
 
-| Camada | Padrão | Exemplo |
+| Layer | Standard | Example |
 |---|---|---|
-| Classes, componentes | PascalCase | `InvoiceService`, `UserCard` |
-| Métodos, vars, funções | camelCase | `issueInvoice`, `dueDate` |
-| Constantes | SCREAMING_SNAKE_CASE tipada | `MAX_ITEMS` |
-| Banco, payloads | snake_case | `due_date`, `customer_id` |
+| Classes, components | PascalCase | `InvoiceService`, `UserCard` |
+| Methods, vars, functions | camelCase | `issueInvoice`, `dueDate` |
+| Constants | SCREAMING_SNAKE_CASE, typed | `MAX_ITEMS` |
+| Database, payloads | snake_case | `due_date`, `customer_id` |
 
-Nomes revelam intenção (`activeLoans`, não `data2`/`$x`/`get()`); idioma do
-domínio de negócio, técnico em inglês.
+Names reveal intent (`activeLoans`, not `data2`/`$x`/`get()`); business-domain
+language for domain terms, English for technical ones.
 
-## Limites de tamanho
+## Size limits
 
-| Métrica | Teto (bloqueante) | Alvo |
-|---|---|---|
-| Linhas por arquivo | 500 | — |
-| Métodos/funções declaradas | 15 | — |
-| Linhas por método/função | 150 | <30; >50 candidatar extração |
-| Returns por método | 3 | — |
+Full table, counting rules, and enforcement in `quality-gates.md`. Summary:
+500 lines/file, 15 declared methods/functions, 150 lines/method, 3 returns —
+blocking. Target <30 lines; extraction candidate >50.
 
-Acima do teto no arquivo alterado: decompor no mesmo trabalho (helpers,
-services, composables coesos, cada um com seam focada e teste). Sem refatorar
-fora do escopo.
+## Comments
 
-## Comentários
-
-- Produção: só decisão não-óbvia (o porquê, restrição de compatibilidade).
-- PHPDoc onde tipagem/análise precisa; narração de IA removida antes do merge.
+- Production: non-obvious decisions only (the why, compatibility constraints).
+- PHPDoc where typing/analysis needs it; AI narration removed before merge.

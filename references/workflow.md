@@ -1,30 +1,31 @@
-# Guia de processo
+# Work process
 
-## Ordem do trabalho
+## Task order
 
-1. Spec/plano aprovados antes de qualquer execução.
-2. Backend primeiro quando há contrato; frontend consome o contrato registrado.
-3. Trabalho em ondas por dependência; fatias pequenas com gates verdes.
-4. Revisão (`review-checklist.md`) → ajustar só o aprovado/pedido → documentar
-   o afetado → fechar com mensagem de commit proposta.
+1. Approved spec/plan before any execution.
+2. Backend first when a contract exists; frontend consumes the recorded contract.
+3. Dependency-ordered waves; small slices with green gates.
+4. Review (`review-checklist.md`) → fix only approved/requested items → document
+   what changed → close with a proposed commit message.
 
-## Escopo de verificação
+## Verification scope
 
-- `changed_files` = fonte adicionada, copiada, modificada ou renomeada; vazia = erro.
-- Lint, formato e policy SÓ nesses arquivos; suíte/typecheck/análise ampla só
-  quando a ferramenta exige contexto — registrar motivo e escopo.
-- Comandos no ambiente dono do código (container/serviço do projeto).
+- `changed_files` = added, copied, modified, or renamed source; empty = error.
+- Lint, format, and policy ONLY on those files; broader suites/typecheck/
+  analysis only when the tool needs context — record reason and scope.
+- Commands run in the environment owning the code (project container/service).
 
-## Commits e Git
+## Commits and Git
 
-- Conventional Commits + hooks (lint/autofix no commit, gates no push).
-- Finalização indefinida = confirmar cada ação; nunca force-push nem inferir
-  aprovação passada. Merge/PR só com OK explícito, CI verde, branch limpa.
+- Conventional Commits + hooks (lint/autofix on commit, gates on push).
+- Unresolved finalization = confirm each action; never force-push nor infer
+  past approval. Merge/PR only with explicit approval, green CI, clean branch.
 
-## Documentação do trabalho
+## Task documentation
 
-- Mudança de comportamento/contrato atualiza doc do módulo: responsabilidade,
-  inputs/outputs/erros, invariantes, efeitos colaterais, auth/privacidade,
-  config e exemplos. Sem duplicar fato sem dono canônico.
-- Relatório final: comandos, ambientes, passa-falha, asserts/cobertura, falha
-  pré-existente ou pendente — com `file:line` por achado e veredito com contagem.
+- Behavior/contract changes update the owning module doc: responsibility,
+  inputs/outputs/errors, invariants, side effects, auth/privacy, config, and
+  examples. No duplicated facts without a canonical owner.
+- Final report: commands, environments, pass/fail, asserts/coverage,
+  pre-existing or pending failures — with `file:line` per finding and a
+  counted verdict.
