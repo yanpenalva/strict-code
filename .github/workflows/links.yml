@@ -1,0 +1,19 @@
+name: links
+
+on:
+  push:
+    paths:
+      - "**/*.md"
+  pull_request:
+    paths:
+      - "**/*.md"
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --relative-root /github/workspace '**/*.md'
+          fail: true
