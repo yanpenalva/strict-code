@@ -163,6 +163,15 @@ named assignments with least privilege; production stays human-approved
 SemVer. `CHANGELOG.md` records every release; `v1.0.0` is the first stable
 release (dual-audited: executor + independent reviewer).
 
+Cut a release with one command (clean tree + changelog entry required):
+
+```bash
+sh scripts/release.sh 1.2.0
+```
+
+The script bumps `SKILL.md`, commits, tags, pushes, opens the GitHub
+release, then verifies the local checkout.
+
 ---
 
 ## 🤝 Contributing
