@@ -16,7 +16,8 @@ echo "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$' || {
 TAG="v$VERSION"
 
 [ -f SKILL.md ] && [ -f CHANGELOG.md ] || { echo "Run from the repo root." >&2; exit 1; }
-[ -z "$(git status --short)" ] || { echo "Working tree is dirty — commit first." >&2; exit 1; }
+dirty="$(git status --short | grep -v ' CHANGELOG.md$' | grep -v ' SKILL.md$' || true)"
+[ -z "$dirty" ] || { echo "Working tree has non-release changes — commit first:" >&2; echo "$dirty" >&2; exit 1; }
 git rev-parse "$TAG" >/dev/null 2>&1 && { echo "Tag $TAG already exists." >&2; exit 1; }
 grep -q "^## $VERSION$" CHANGELOG.md || { echo "CHANGELOG.md lacks a '## $VERSION' entry." >&2; exit 1; }
 command -v gh >/dev/null || { echo "gh CLI not found." >&2; exit 1; }
