@@ -173,10 +173,10 @@ release (dual-audited: executor + independent reviewer).
 Cut a release with one command (clean tree + changelog entry required):
 
 ```bash
-sh scripts/release.sh 1.2.0
+strict-code release 1.2.0
 ```
 
-The script bumps `SKILL.md`, commits, tags, pushes, opens the GitHub
+The command bumps `SKILL.md`, commits, tags, pushes, opens the GitHub
 release, then verifies the local checkout.
 
 ---
