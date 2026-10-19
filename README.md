@@ -75,11 +75,18 @@ thresholds, owners) — the core stays untouched.
 ### Updating
 
 ```bash
-# Clone: pin the latest stable tag (see the Releases page)
-cd <path-to-strict-code> && git fetch --tags && git checkout <latest-tag>
+# One-time install of the CLI (requires ~/.local/bin on your PATH)
+git clone https://github.com/yanpenalva/strict-code.git ~/.local/share/strict-code
+ln -s ~/.local/share/strict-code/bin/strict-code ~/.local/bin/strict-code
 
-# Submodule: pin the latest stable tag inside the vendored copy
-cd docs/strict-code && git fetch --tags && git checkout <latest-tag>
+# Update any copy to the latest stable tag
+strict-code update [path-to-copy]
+```
+
+Manual fallback (clone or submodule):
+
+```bash
+cd <path-to-copy> && git fetch --tags && git checkout <latest-tag>  # see the Releases page
 ```
 
 ---

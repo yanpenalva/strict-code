@@ -1,0 +1,65 @@
+#!/bin/sh
+# strict-code CLI — pin the skill to the latest stable tag, cut releases.
+#
+# Install:
+#   git clone https://github.com/yanpenalva/strict-code.git ~/.local/share/strict-code
+#   ln -s ~/.local/share/strict-code/bin/strict-code ~/.local/bin/strict-code
+#
+# Usage:
+#   strict-code update [path]   fetch tags, checkout latest stable tag (default: enclosing skill copy)
+#   strict-code release 1.2.0   (maintainer) bump, commit, tag, push, GitHub release
+#   strict-code version [path]  print the installed version
+set -eu
+
+cmd="${1:-help}"
+arg="${2:-}"
+
+resolve_root() {
+  if [ -n "$arg" ]; then
+    [ -f "$arg/SKILL.md" ] || { echo "Not a strict-code copy: $arg" >&2; exit 1; }
+    (cd "$arg" && pwd)
+    return
+  fi
+  dir="$PWD"
+  while [ "$dir" != "/" ]; do
+    if [ -f "$dir/SKILL.md" ] && grep -q '^name: strict-code$' "$dir/SKILL.md"; then
+      echo "$dir"
+      return
+    fi
+    dir="$(dirname "$dir")"
+  done
+  echo "Run inside a strict-code copy or pass its path." >&2
+  exit 1
+}
+
+case "$cmd" in
+  update)
+    root="$(resolve_root)"
+    cd "$root"
+    [ -d .git ] || { echo "Not a git checkout: $root" >&2; exit 1; }
+    git fetch --tags origin
+    latest="$(git tag --list 'v[0-9]*' --sort=-v:refname | head -n 1)"
+    [ -n "$latest" ] || { echo "No stable tag found." >&2; exit 1; }
+    current="$(git describe --tags --always)"
+    if [ "$current" = "$latest" ]; then
+      echo "Already at latest stable ($latest) — $root"
+    else
+      git checkout -q "$latest"
+      echo "Updated $current -> $latest — $root"
+    fi
+    ;;
+  version)
+    root="$(resolve_root)"
+    grep '^version: ' "$root/SKILL.md" | head -n 1
+    ;;
+  release)
+    [ -n "$arg" ] || { echo "Usage: strict-code release <major.minor.patch>" >&2; exit 1; }
+    root="$(resolve_root)"
+    cd "$root"
+    sh scripts/release.sh "$arg"
+    ;;
+  *)
+    echo "Usage: strict-code {update [path]|release <version>|version [path]}" >&2
+    exit 1
+    ;;
+esac
