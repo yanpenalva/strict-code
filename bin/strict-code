@@ -68,7 +68,7 @@ case "$cmd" in
     sed "s/^version: .*/version: $VERSION/" SKILL.md > SKILL.md.tmp && mv SKILL.md.tmp SKILL.md
     grep -q "^version: $VERSION$" SKILL.md || { echo "SKILL.md version bump failed." >&2; exit 1; }
     git add SKILL.md CHANGELOG.md
-    git commit -m "chore(release): bump to $TAG"
+    git commit --allow-empty -m "chore(release): bump to $TAG"  # no-op when version files already committed
     git tag "$TAG"
     git push origin main
     git push origin "$TAG"
