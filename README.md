@@ -72,6 +72,16 @@ git submodule add https://github.com/yanpenalva/strict-code.git docs/strict-code
 Then instantiate `references/project-profile.md` for your stack (commands,
 thresholds, owners) — the core stays untouched.
 
+### Updating
+
+```bash
+# Clone: pin the latest stable tag (see the Releases page)
+cd <path-to-strict-code> && git fetch --tags && git checkout <latest-tag>
+
+# Submodule: pin the latest stable tag inside the vendored copy
+cd docs/strict-code && git fetch --tags && git checkout <latest-tag>
+```
+
 ---
 
 ## 🗂️ What's Inside

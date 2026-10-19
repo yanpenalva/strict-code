@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: Use for any software task: write, review, test, plan code.
-version: 1.0.0
+version: 1.1.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]

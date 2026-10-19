@@ -3,6 +3,16 @@
 All notable changes to the `strict-code` skill. Versions below 1.0.0 are
 development iterations; 1.0.0 is the first stable release.
 
+## 1.1.0
+
+- Testing strategy: Unit-then-Feature order (unit locks the rule, feature
+  locks wiring); behavior-only scope — no tests for language/framework
+  guarantees; empty/pass-through classes take coverage-ignore instead of
+  fake tests; privates covered only via public contract; silent-failure cut
+  heuristic.
+- PHP: every concrete class is `final` (`abstract` only with documented
+  reason) — non-final concrete fails review.
+
 ## 1.0.0
 
 - Stable release: 30 reference guides, en-US throughout, audited twice (sol
