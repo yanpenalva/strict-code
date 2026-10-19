@@ -15,7 +15,7 @@ The smallest set proving the changed behavior + the area's required regression.
 | Feature console | `tests/Feature/Console/` | command: output, exit code, side effects |
 | Frontend | `*.spec.ts` next to source | component/composable/service with mocked HTTP |
 
-Authorization/route changes need feature tests; service rules need focused unit.
+Order is Unit then Feature: unit locks the business rule in isolation; feature locks wiring (route, middleware, authZ, serialization). No feature compensates missing unit. Test behavior, not language/framework guarantees.
 
 ## Anatomy per layer
 
@@ -33,7 +33,7 @@ Authorization/route changes need feature tests; service rules need focused unit.
 - Test names = behavior + scenario; specific assertions (`assertSame`,
   `assertCount`, `assertDatabaseHas`, HTTP status asserts).
 - Success + auth/validation failures + relevant edges; never test private
-  methods directly.
+  class/method directly — exercise through the public contract.
 - Factories and states over hand-built models; never mock Eloquent when
   behavior depends on persistence.
 - Front: mocked HTTP, no real endpoints, no arbitrary sleeps, no
@@ -50,10 +50,12 @@ Authorization/route changes need feature tests; service rules need focused unit.
 
 ## What not to test by default
 
-- Framework behavior (trivial getters/setters), privates in isolation, config
-  outside scope, the whole suite for a localized change.
-- Exception: when a route, config, or integration IS the changed contract or
-  the likely regression boundary.
+- Language/type-system guarantees (param assignment, pass-through getter/setter, trivial constructor): breaks loudly alone, no test.
+- Empty or pass-through classes with no branch: no test, add coverage-ignore (`@codeCoverageIgnore`, `istanbul ignore`, `coverage: exclude`) instead of fake tests.
+- Private class/method in isolation: cover only via public entry points; privates are refactor-free detail.
+- Framework behavior, config outside scope, the whole suite for a localized change.
+- Exception: test trivial-looking code only on silent-failure risk (wrong default, bad mapping/normalization, swallowed error); when a route, config, or integration IS the changed contract or the likely regression boundary.
+- Cut heuristic: if removing the test lets the bug pass silently (wrong data/charge/access), keep; if it would explode at boot/typecheck, discard.
 
 ## Completion record
 

@@ -15,7 +15,7 @@ final class InvoiceService
 }
 ```
 
-`final class` by default; `readonly` properties and `readonly` classes for
+`final` on every concrete class (`abstract` only with documented reason); `readonly` properties and `readonly` classes for
 value-like objects; constructor promotion for all injected dependencies.
 
 ## Dispatch and domain values

@@ -98,7 +98,7 @@ SQL is a security failure, not a style one.
   value object. Never scattered magic numbers/strings.
 - Constructor dependencies (`private readonly` + promotion), immutable where
   applicable; statics with dependencies forbidden — inject instead.
-- `final class` by default; extension only with a documented reason.
+- Every concrete PHP class is `final`; inheritance only via `abstract` base with documented reason — non-final concrete fails review.
 
 ## Naming
 

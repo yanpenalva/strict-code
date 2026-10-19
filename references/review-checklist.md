@@ -65,7 +65,7 @@ $query
 - [ ] Single responsibility — clear reason to change?
 - [ ] Dependency injection — no `new` in services?
 - [ ] Abstraction level — controller orchestrates, service rules, repository
-  queries; `final class` by default?
+  queries; every concrete PHP class `final` (`abstract` only with documented reason)?
 - [ ] No method above its ceiling without same-task decomposition?
 
 ## 8. Static analysis `[BLOCKING]`
