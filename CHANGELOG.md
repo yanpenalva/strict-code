@@ -3,6 +3,11 @@
 All notable changes to the `strict-code` skill. Versions below 1.0.0 are
 development iterations; 1.0.0 is the first stable release.
 
+## 1.2.1
+
+- Loader fix: quote the `description` (unquoted `:` broke YAML frontmatter
+  parsing and the skill refused to load).
+
 ## 1.2.0
 
 - `bin/strict-code` CLI: `update [path]` pins any copy to the latest stable

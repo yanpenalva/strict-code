@@ -1,7 +1,7 @@
 ---
 name: strict-code
-description: Use for any software task: write, review, test, plan code.
-version: 1.2.0
+description: "Use for any software task: write, review, test, plan code."
+version: 1.2.1
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
