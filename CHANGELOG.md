@@ -5,11 +5,10 @@ development iterations; 1.0.0 is the first stable release.
 
 ## 1.2.0
 
-- Release tooling: `scripts/release.sh` cuts a release in one command
-  (version bump, commit, tag, push, GitHub release, local verify).
 - `bin/strict-code` CLI: `update [path]` pins any copy to the latest stable
-  tag, plus `version` and `release` subcommands; install via symlink, see
-  README.
+  tag, `release <version>` cuts a release in one command (version bump,
+  commit, tag, push, GitHub release, local verify), plus `version`;
+  install via symlink, see README.
 
 ## 1.1.0
 
