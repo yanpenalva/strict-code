@@ -23,7 +23,7 @@ services; the framework stays at the edges.
 
 ## Conventions
 
-- Services behind interfaces (mocks + DIP); providers bind by domain.
+- Services behind interfaces (test doubles + DIP: In-Memory fakes by default, mocks only for interaction contracts); providers bind by domain.
 - `Response::HTTP_*` constants in every response, including validation errors
   and empty results.
 - Shared exception trait: specific exception → mapped status (HttpException →

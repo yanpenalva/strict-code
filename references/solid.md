@@ -42,7 +42,7 @@ dispatch prefers `match` over `elseif` chains.
 
 An implementation must accept everything the interface promises and keep its
 guarantees (no narrowed input types, no new unchecked exceptions, no weakened
-postconditions). A mock used in tests must obey the same contract.
+postconditions). A test double (fake, mock, stub) must obey the same contract.
 
 ## ISP — small focused interfaces
 
