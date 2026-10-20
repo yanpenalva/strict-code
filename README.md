@@ -6,10 +6,14 @@
 
 **strict-code** is a strict, AI-learnable system of code writing and review
 standards: an agnostic core (flow control, typing, structural ceilings,
-security, process) plus dedicated stack guides for **PHP/Laravel** and
+security, review criteria) plus dedicated stack guides for **PHP/Laravel** and
 **TypeScript/Vue**. It is consumed as an agent skill (`SKILL.md` +
 `references/`), audited twice, and versioned with SemVer. All contents in
 en-US.
+
+**Criteria, not a workflow.** With an external workflow owner, consume its
+classification, approved spec, architecture, plan, and check evidence; never
+reclassify, own discovery, or approve product scope or production.
 
 ---
 
@@ -89,6 +93,10 @@ Manual fallback (clone or submodule):
 cd <path-to-copy> && git fetch --tags && git checkout <latest-tag>  # see the Releases page
 ```
 
+Official installation is this repository (clone, submodule, or the CLI above);
+a policy copy inside another project's kit is that project's maintained
+artifact, not an installation — upgrade it through that project's update path.
+
 ---
 
 ## 🗂️ What's Inside
@@ -101,7 +109,7 @@ Details live in `references/`:
 | Code | style, solid, modern-php, laravel, anti-patterns, patterns, frontend |
 | Quality | quality-gates, review-checklist, testing, api-contracts |
 | Conventions | conventions, security, module-docs, architecture-decisions |
-| Process | intake, classification, domains, delivery, workflow, discovery |
+| Process (standalone only) | intake, classification, domains, delivery, workflow, discovery |
 | Operation | profiles, orchestration, governance, interaction, release, incident |
 | Meta | project-profile, artifact-templates, agent-comms |
 
@@ -151,7 +159,7 @@ in `references/quality-gates.md`. Reviews close with severity
 
 ---
 
-## 🔁 Working With the Skill
+## 🔁 Working With the Skill (standalone only)
 
 ```text
 Intake → Specify → Plan → Preflight → Execute → Verify → Review → Release → Observe → Close

@@ -1,6 +1,6 @@
 ---
 name: strict-code
-description: "Use for any software task: write, review, test, plan code."
+description: "Use for engineering criteria: write, review, test, plan code."
 version: 1.2.1
 author: Yan Penalva, Hermes Agent
 license: MIT
@@ -13,14 +13,20 @@ metadata:
 
 # Code Standards
 
-Mandatory code writing and review standards. They apply to every project
-unless the work spec records an exception.
+Mandatory engineering criteria: implementation patterns, quality, engineering
+security, and code review, narrowable only by an approved, scoped, expiring
+exception in the work spec.
+
+With an external workflow owner, consume its classification, approved spec,
+architecture, plan, and check evidence; never reclassify or restate the spec,
+and engineering review cannot approve product scope, release, or production.
 
 ## When to Use
 
 - Write, refactor, or review code in any language (agnostic core rules); PHP/Laravel and TypeScript/Vue have dedicated stack guides.
 - Pull requests, tests, migrations, commits, code audits.
-- Do not use for: documentation without code; product decisions (humans decide).
+- Do not use for: documentation without code; product decisions (humans decide);
+  workflow ownership where an external workflow owner exists (`intake.md`).
 
 ## Principles
 
@@ -50,8 +56,9 @@ unless the work spec records an exception.
 - API responses follow the standard envelope with semantic status codes
   (`api-contracts.md`).
 - Conventional Commits + hooks; merge/PR only with explicit approval (`conventions.md`).
-- Work enters through intake/classification/routing before specifying (`intake.md`)
-  and flows through the delivery stages to a criteria-checked close (`delivery.md`).
+- Standalone only (no external workflow owner): work enters through
+  intake/classification/routing (`intake.md`) and reaches a criteria-checked
+  close (`delivery.md`); with an owner, consume its front door.
 - Reviews close with `file:line` + severity + verdict (`review-checklist.md`).
 - One primary working profile per task; classification, routing, and
 authorization stay separate decisions (`profiles.md`).
@@ -81,7 +88,7 @@ authorization stay separate decisions (`profiles.md`).
 | Vue frontend specifics | `references/frontend.md` |
 | Intake, classification, routing | `references/intake.md` |
 | Delivery stages and closing | `references/delivery.md` |
-| Work process summary | `references/workflow.md` |
+| Work process summary (standalone only) | `references/workflow.md` |
 | Review checklist | `references/review-checklist.md` |
 | Artifact templates | `references/artifact-templates.md` |
 | Agent communication | `references/agent-comms.md` |

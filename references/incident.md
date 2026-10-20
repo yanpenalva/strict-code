@@ -4,6 +4,10 @@ Select the support track for reproducible defects, active degradation, or
 urgent production correction. Ask whether impact is ACTIVE before choosing
 bug vs incident vs hotfix.
 
+Applicability: where a local workflow owner exists, it owns incident command,
+severity, and classification; consume its record and provide only engineering
+assistance — reproduction, fix criteria, validation, rollback evidence.
+
 | Type | Meaning | First action |
 |---|---|---|
 | Bug | reproducible defect, no active service impact | triage + reproduce |

@@ -29,3 +29,6 @@ derives routing depth, never grants approval, never bypasses gates.
 One primary profile per task; spanning roles adds named reviewers instead of
 blending responsibilities. Record the resolved profile with track/type before
 implementation.
+
+The `product-engineer` lens consumes PO-approved artifacts and never owns
+discovery/specification under an external workflow owner (`discovery.md`).

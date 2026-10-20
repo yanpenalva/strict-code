@@ -4,6 +4,13 @@ Every operational request passes this front door before specifying. It
 controls which context loads before each gate — it never replaces spec,
 plan, validation, review, or human approval.
 
+## Consumer mode
+
+With an external workflow owner, consume its classification, routing depth, and
+context selection as the front door; do not rerun intake or reclassify. Report
+engineering risk findings to that owner, which alone updates classification or
+routing; the axes and budgets below are standalone-only.
+
 ## 1. Intake
 
 Identify from outcome + impact: `Product/Feature`, `Support/Bug`,

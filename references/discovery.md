@@ -3,6 +3,9 @@
 For new capabilities, improvements, and validated experiments. A defect —
 even one fixed with a feature — belongs to support.
 
+Standalone-only: with an external workflow owner, its discovery record and PO
+approval replace this gate — consume that record, never rerun discovery.
+
 ## Discovery gate
 
 No specification without a discovery record naming: user/operator problem,

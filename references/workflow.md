@@ -1,4 +1,7 @@
-# Work process (summary)
+# Work process (summary — standalone only)
+
+Applies only where no external workflow owner exists; with an owner, follow its
+workflow and use `delivery.md` for the engineering review contract.
 
 Canonical detail lives in `delivery.md`, `orchestration.md`, `quality-gates.md`,
 and `module-docs.md`. This file is the short version:

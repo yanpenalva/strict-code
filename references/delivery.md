@@ -4,6 +4,12 @@ Canonical flow for features, fixes, and HUs. Documentation-only or tiny
 maintenance may use a focused review with evidence instead — functional
 changes always need a versioned spec first and must not exceed its scope.
 
+## Applicability
+
+Standalone only when no external workflow owner exists; with an owner, consume
+its approved spec and gate record by pointer — the `External spec` line in
+`artifact-templates.md` — and supply engineering review evidence only.
+
 ```text
 Specify → Plan → Preflight → Backend → Frontend → Handoff → Validate → Review → Adjust → Document → Release → Observe → Close
 ```
@@ -61,3 +67,10 @@ approved spec; progress updated during execution and removed at close;
 handoff synced where applicable; review run against request + spec + diff +
 checklist; validations executed; docs updated or declared unnecessary;
 verdict + counted findings recorded.
+
+## Continuity (ai-memory)
+
+ai-memory is continuity only: it may locate where work stopped. Reload the
+repository instructions, approved spec, and current gate from their owners
+before resuming; it never replaces them, grants authority, or stores secrets,
+PII, or unverified claims.

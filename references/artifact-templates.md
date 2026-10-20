@@ -10,6 +10,9 @@ field; `NOT APPLICABLE` is an explicit answer, never a blank.
 - Context and evidence: docs consulted (only relevant ones), codebase
   consulted; `NOT FOUND` for absent files/classes/routes/permissions/migrations.
 - Intake record: track/type + classification axes + routing depth.
+- External spec (when a workflow owner exists): `External spec: <repo-relative
+  path | URL | opaque id>; owner: <workflow owner>; revision: <approved
+  revision or NOT FOUND>` — a pointer with its owner, never a copy of the body.
 - Decisions and change log with dates; `Versioned Handoff` with exactly the
   state needed to resume elsewhere.
 

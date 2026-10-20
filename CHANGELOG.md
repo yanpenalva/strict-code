@@ -3,6 +3,19 @@
 All notable changes to the `strict-code` skill. Versions below 1.0.0 are
 development iterations; 1.0.0 is the first stable release.
 
+## 1.2.2
+
+Consumer-mode boundary patch; `SKILL.md` keeps `1.2.1` until
+`bin/strict-code release 1.2.2`.
+
+- Scope narrowed to engineering criteria; the skill consumes an external
+  workflow owner's classification, approved spec, architecture, plan, and check
+  evidence instead of reclassifying or restating them.
+- Lifecycle guides labelled standalone-only or consumer-mode; external specs
+  and engineering sources are path/URL/id pointers with owner and revision;
+  ai-memory is continuity-only in `references/delivery.md`.
+- Preserved: all guides, MUSTs, axes, routing, gates, standalone behavior; no new file, no tag.
+
 ## 1.2.1
 
 - Loader fix: quote the `description` (unquoted `:` broke YAML frontmatter

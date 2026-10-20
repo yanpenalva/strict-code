@@ -4,6 +4,10 @@ Score each axis from objective criteria — never from line/file counts alone,
 never from urgency (urgency belongs to support type/severity), never from who
 does the work.
 
+Consumer mode: with an external workflow owner, these rubrics explain the axes
+it records — do not rescore or restart classification from a direct load.
+Return engineering risk findings to that owner (`intake.md`).
+
 ## Complexity (how hard to do correctly)
 
 | Value | Meaning |

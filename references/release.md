@@ -1,5 +1,10 @@
 # Release and observation
 
+Applicability: technical release evidence only — compatibility, rollback,
+readiness, smoke, observation design. Release progression, authorization, and
+the lifecycle belong to the project's workflow owner where one exists; its
+record replaces this one, and nothing here authorizes a release.
+
 ## Review proportionality
 
 Every production-affecting change gets a review proportional to risk and
