@@ -7,7 +7,7 @@ The smallest set proving the changed behavior + the area's required regression.
 | Layer | Typical location | Use |
 |---|---|---|
 | Service | `tests/Unit/Services/` | business rules with In-Memory fakes of repository interfaces |
-| Repository | `tests/Unit/Repositories/` | concrete persistence against test DB — classified as integration |
+| Repository | `tests/Integration/Repositories/` (or project equivalent) | concrete persistence against test DB |
 | Controller | `tests/Unit/Http/Controllers/` | delegation and response mapping |
 | FormRequest | `tests/Unit/Http/Requests/` | rules through the real validator (local stub for injection) |
 | Model | `tests/Unit/Models/` | relations, casts, fillable, soft-delete |
@@ -15,7 +15,7 @@ The smallest set proving the changed behavior + the area's required regression.
 | Feature console | `tests/Feature/Console/` | command: output, exit code, side effects |
 | Frontend | `*.spec.ts` next to source | component/composable/service with mocked HTTP |
 
-Order is Unit then Feature: unit locks the business rule in isolation; feature locks wiring (route, middleware, authZ, serialization). No feature compensates missing unit. Test behavior, not language/framework guarantees. A use-case test with fakes is unit, never E2E; a test against a real database is integration, even when executed by PHPUnit/Pest.
+Order is Unit then Feature: unit locks the business rule in isolation; feature locks wiring (route, middleware, authZ, serialization). Test behavior, not language/framework guarantees. Each layer covers its own responsibility with risk-appropriate depth — no automatic duplication across layers, no layer compensating for another's missing coverage. Classify by what the test exercises: with fakes it is unit (never E2E); against a real database it is integration, regardless of runner.
 
 ## Doubles
 
