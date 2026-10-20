@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: "Use for engineering criteria: write, review, test, plan code."
-version: 1.2.1
+version: 1.2.2
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
