@@ -1,7 +1,24 @@
 # Review checklist
 
-Mandatory before opening a PR or calling a task done. Mark each item.
-`[BLOCKING]` fails the review; `[TARGET]` guides it.
+Mandatory before opening a PR or calling a task done. Mark each item `PASS`,
+`FAIL`, `NOT RUN`, or `N/A` — `PASS` needs evidence, `N/A` needs a reason.
+`[BLOCKING]` fails the review; `[TARGET]` guides it. Approve only when every
+applicable blocking item passes or carries an approved, scoped exception;
+otherwise the verdict is `CHANGES`. Command evidence names the command,
+environment, reviewed revision/diff, scope, and result, and counts only when it
+covers that same revision and scope.
+
+## Severity
+
+- `blocking` — violates a blocking rule, or breaks behavior, data, or security;
+  no approval until fixed.
+- `major` — material defect or risk outside the blocking set; fixed before
+  release.
+- `minor` — contained improvement; next cycle.
+- `nit` — preference; never blocks and is never recorded as debt.
+
+A finding carries rule, `file:line`, evidence, impact, and severity. The verdict
+counts blocking and non-blocking findings separately.
 
 ## 1. Guard clauses `[BLOCKING]`
 
@@ -35,8 +52,8 @@ $query
 
 ## 3. No `else` `[BLOCKING]`
 
-- [ ] No new `else`/`elseif`/`v-else`/`v-else-if` introduced; directly-relevant pre-existing ones in touched code refactored?
-- [ ] Directly-relevant pre-existing branches in touched code refactored preserving order and side effects; wider cleanup split into its own task?
+- [ ] No new alternate branch in any syntax (`else`, `else if`, `elseif`, `elif`, `v-else`, `v-else-if`)?
+- [ ] Conditionals whose condition or branch behavior this diff changes brought into compliance, preserving order and side effects; unrelated legacy left for its own task?
 
 ## 4. Performance and composition `[TARGET]`
 
@@ -56,8 +73,8 @@ $query
 
 - [ ] `declare(strict_types = 1)` on top of PHP files?
 - [ ] Every parameter, return, and property typed; `readonly` where immutable?
-- [ ] `#[Override]` on overrides; property hooks or dedicated methods for get/set?
-- [ ] Array search via `array_find/any/all` (PHP ≥8.4 or project-version equivalent); JSON via `json_validate()` (PHP ≥8.3)?
+- [ ] `#[Override]` where the project's minimum supported PHP provides it; property hooks only where supported and access logic exists, dedicated methods otherwise?
+- [ ] Array search via `array_find/any/all` (PHP ≥8.4 or project-version equivalent); `json_validate()` only when validating without decoding (PHP ≥8.3)?
 - [ ] Zero narrative comments; PHPDoc only where the type is inexpressible?
 
 ## 7. SOLID / Clean `[BLOCKING]`
@@ -76,9 +93,10 @@ $query
 
 ## 9. Tests `[BLOCKING]`
 
-- [ ] Unit tests cover changed service/controller methods?
+- [ ] Every changed behavior has a focused test at the lowest layer that proves its contract — routed feature test for HTTP wiring/middleware, real-database integration for persistence?
 - [ ] Authorization tests (401/403) included?
 - [ ] Feature tests cover new endpoints?
+- [ ] No duplicated unit test for behavior an existing route/integration test already proves; no new test for a behavior-preserving edit without recording why?
 - [ ] Focused tests pass; broader regression justified when run?
 
 ## 10. Vue frontend `[BLOCKING]`

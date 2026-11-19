@@ -26,8 +26,7 @@ services; the framework stays at the edges.
 - Services behind interfaces (test doubles + DIP: In-Memory fakes by default, mocks only for interaction contracts); providers bind by domain.
 - `Response::HTTP_*` constants in every response, including validation errors
   and empty results.
-- Shared exception trait: specific exception → mapped status (HttpException →
-  its code; NotFound → 404; Validation → 422; Authorization → 403; default →
-  500), log with context first, preserve `previous`.
+- Shared exception handler implements the mapping in `api-contracts.md`; log
+  with context first, preserve `previous`.
 - Formatters/analyzers: Pint on PHP, PHPStan/Larastan for types, PHPUnit (or
   parallel runner) for tests.

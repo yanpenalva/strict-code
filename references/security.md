@@ -3,7 +3,11 @@
 Verifiable requirements. Every item needs a test or evidence; declared intent
 without a mechanism does not count.
 
-## Hard prohibitions (no exception without justification)
+## Hard prohibitions (waiver requires the exception process)
+
+A waiver requires prior approval by the designated human policy owner and a
+work-spec record naming the rule, affected scope, reason, compensating control,
+and expiry. The executor never self-grants one.
 
 - Concatenating SQL or shell commands; `eval`; uncontrolled `unserialize` or
   over user input.
@@ -29,7 +33,8 @@ without a mechanism does not count.
 - Use the project's existing mechanisms (session/token, permission-based RBAC);
   never reinvent auth inside a task.
 - Follow the route's explicit contract: middleware, policy, public route, or
-  documented heartbeat. A generic checklist never vetoes a documented exception.
+  documented heartbeat. A documented public route is a contract choice, not a
+  waiver of the other requirements in this guide.
 - Sensitive actions (password, consent, revocation): revalidate identity or
   record justification.
 
@@ -38,7 +43,10 @@ without a mechanism does not count.
 - Short expiry, explicit algorithm, working revocation (logout/block really
   invalidates).
 - Tests: expired, revoked, inactive profile, cross-user isolation (A never
-  reaches B's data; 401/403 on negatives).
+  reaches B's data; 401/403 on negatives). For a changed protected operation,
+  also prove that the authorized principal succeeds and that missing
+  credentials, insufficient permission, and cross-owner or cross-tenant access
+  are denied, asserting the status the route contract specifies.
 
 ## Input and output
 

@@ -8,9 +8,8 @@ Always split by business domain first, by technical role second. New code
 lands in its owning domain (services, repositories, requests namespaced per
 domain); cross-domain use goes through explicit stable contracts — never by
 reaching into another domain's internals. A class or file at its ceiling
-splits along domain seams before any other axis. Confirmed ceiling: at most
-15 declared methods/functions per production class/file (including private
-methods and constructor).
+splits along domain seams before any other axis. Ceilings and counting rules:
+`quality-gates.md`.
 
 ## Layer boundaries (backend)
 
@@ -37,8 +36,8 @@ methods and constructor).
 ## Authorization
 
 - Permission middleware + policies + service checks must agree on the same
-  route contract; exceptions (public route, heartbeat) are documented in the
-  contract — a generic checklist never vetoes a documented exception.
+  route contract; a documented public route or heartbeat is part of that
+  contract, never a waiver of the other requirements (`security.md`).
 
 ## Auditing and soft-deletes
 

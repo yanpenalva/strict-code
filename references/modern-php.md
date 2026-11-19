@@ -35,8 +35,9 @@ enum InvoiceStatus: string { case Draft = 'draft'; case Issued = 'issued'; }
 function actionNeverReturns(): never { throw new DomainException('...'); }
 ```
 
-`#[Override]` on every override; typed constants (`private const string`) when
-supported; property hooks for access logic on DTOs/value objects.
+`#[Override]` on every override where the minimum supported PHP provides it;
+typed constants (`private const string`) when supported; property hooks only
+where supported and access logic is needed, dedicated methods otherwise.
 
 ## Arguments and arrays
 
@@ -50,11 +51,12 @@ $all = [...$a, ...$b];
 // array_any / array_all / array_find instead of manual loops
 $hasOverdue = array_any($invoices, fn ($i) => $i->overdue);
 
-// json_validate instead of decode + error check
+// json_validate only when validating without decoding
 if (!json_validate($payload)) { throw new ValidationException('payload'); }
 ```
 
-Prefer `??`/`??=` for defaults, `data_get()`/`Arr::only()`/`Arr::except()`
+When the decoded value is needed, decode once and handle the error — never
+validate and then decode twice. Prefer `??`/`??=` for defaults, `data_get()`/`Arr::only()`/`Arr::except()`
 for read/compose; `unset()` only when removal is the clearest intent.
 
 ## Text and encoding

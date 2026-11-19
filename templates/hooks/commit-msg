@@ -1,0 +1,5 @@
+#!/bin/sh
+# commit-msg hook: enforce Conventional Commits. Copy to .git/hooks/commit-msg
+# (or wire through husky/lefthook) and keep commitlint installed in the project.
+set -eu
+exec npx --no-install commitlint --edit "$1"

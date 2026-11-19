@@ -7,6 +7,7 @@
 #
 # Usage:
 #   strict-code update [path]   fetch tags, checkout latest stable tag (default: enclosing skill copy)
+#   strict-code check [path]    validate rule consistency (refs, version, examples)
 #   strict-code release 1.2.0   (maintainer) bump, commit, tag, push, GitHub release
 #   strict-code version [path]  print the installed version
 set -eu
@@ -48,6 +49,10 @@ case "$cmd" in
       echo "Updated $current -> $latest — $root"
     fi
     ;;
+  check)
+    root="$(resolve_root)"
+    exec python3 "$root/bin/strict-code-check" "$root"
+    ;;
   version)
     root="$(resolve_root)"
     grep '^version: ' "$root/SKILL.md" | head -n 1
@@ -78,7 +83,7 @@ case "$cmd" in
     echo "Released $TAG — local checkout at $(git describe --tags)."
     ;;
   *)
-    echo "Usage: strict-code {update [path]|release <version>|version [path]}" >&2
+    echo "Usage: strict-code {update [path]|check [path]|release <version>|version [path]}" >&2
     exit 1
     ;;
 esac

@@ -6,7 +6,7 @@ derives routing depth, never grants approval, never bypasses gates.
 
 ## Resolution (lazy, in order)
 
-1. Explicit user choice, or a recorded project preference.
+1. Explicit task choice; otherwise the recorded project preference.
 2. Otherwise the configured default; state it briefly (`senior-software-engineer`
    unless the project says otherwise).
 3. Ask only when no default fits or selection materially changes collaboration

@@ -11,7 +11,9 @@ absent; no work item is created by onboarding.
 - Layout: repo shape, backend/frontend boundaries, owner paths.
 - Quality: format/lint/analysis/test commands per area + thresholds owned here
   (coverage target, complexity caps) or `NOT FOUND`.
-- Conventions: naming deltas, commit hooks, migration rules, HTTP envelope.
+- Conventions: naming deltas, the decided client-visible locale + covered
+  surfaces (per `style.md`; ask when a surface has none), commit hooks,
+  migration rules, HTTP envelope.
 - Security: auth model, permission contract, secrets store, data classification.
 - Experience budgets: accessibility baseline + latency/bundle/memory/query caps (or NOT FOUND).
 - Operations: environments, deploy path, smoke check, observation signals,

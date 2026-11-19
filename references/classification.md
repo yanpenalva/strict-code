@@ -40,7 +40,11 @@ ACTIVE incident's observed impact — related but distinct, never copied here.
 Root `risk` (low/medium/high/critical) grades consequence × uncertainty of
 proceeding. Weigh: auth/authZ, sensitive data, payments, destructive or
 irreversible ops, public contracts, infra/availability, data integrity,
-rollback difficulty. Humans accept risk — classification never does.
+rollback difficulty. Critical: credible irreversible loss of critical data,
+unauthorized access to protected data at scale, or sustained outage of a
+critical service. High: material but recoverable harm. Record the credible
+failure and the recovery path behind the grade. Humans accept risk —
+classification never does.
 
 Security signal (switches existing contracts, creates no new rules):
 

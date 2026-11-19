@@ -1,7 +1,7 @@
 ---
 name: strict-code
 description: "Use for engineering criteria: write, review, test, plan code."
-version: 1.3.1
+version: 1.5.0
 author: Yan Penalva, Hermes Agent
 license: MIT
 platforms: [linux, macos, windows]
@@ -39,15 +39,22 @@ and engineering review cannot approve product scope, release, or production.
 ## Core rules
 
 - No `else`, `elseif`, `v-else`, `v-else-if`: guard clauses, early return,
-  `match`, `computed`, or equivalent linear flow (`style.md`).
+  `match`, `computed`, or equivalent linear flow in any syntax (`style.md`).
 - Strings via interpolation; SQL only with parameter binding (`style.md`).
 - Namespaced PHP imports natives with `use function <name>;` (`style.md`).
 - Full typing + `strict_types = 1`; enums for closed sets (`style.md`).
+- Language: en-US for every artifact; client-visible text uses the locale
+  decided at intake or in the owner's spec and recorded in the project profile;
+  commit descriptions follow the conversation, type/scope always en-US
+  (`style.md`, `conventions.md`).
 - Blocking ceilings: 500 lines/file, 15 declared methods/functions, 150
   lines/method, 3 returns, 7 params, cyclomatic ≤10 / cognitive ≤15
   (`quality-gates.md`). Target: <30 lines; extraction candidate >50.
 - Layers: thin controller, rules in service, queries in repository, validation
   in FormRequest, shape in Resource (`patterns.md`, `laravel.md`).
+- Core rules bind regardless of stack and are not restated per guide;
+  stack-specific requirements bind only to the stack that guide names
+  (`patterns.md`, `laravel.md`, `frontend.md`).
 - SOLID with one reason to change per class; no god services (`solid.md`,
   `anti-patterns.md`).
 - Sanitized logs; authorization follows the route's explicit contract (`security.md`).
@@ -55,7 +62,8 @@ and engineering review cannot approve product scope, release, or production.
   (`testing.md`, `workflow.md`).
 - API responses follow the standard envelope with semantic status codes
   (`api-contracts.md`).
-- Conventional Commits + hooks; merge/PR only with explicit approval (`conventions.md`).
+- Conventional Commits always (required `commit-msg`); merge/PR only with
+  explicit approval (`conventions.md`, `orchestration.md`).
 - Standalone only (no external workflow owner): work enters through
   intake/classification/routing (`intake.md`) and reaches a criteria-checked
   close (`delivery.md`); with an owner, consume its front door.

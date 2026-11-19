@@ -51,7 +51,8 @@ Order is Unit then Feature: unit locks the business rule in isolation; feature l
 
 ## Conventions
 
-- Test names = behavior + scenario; specific assertions (`assertSame`,
+- Test names = behavior + scenario, no ticket numbers or `test1`
+  (`it_issues_invoice_when_due_date_arrives`); specific assertions (`assertSame`,
   `assertCount`, `assertDatabaseHas`, HTTP status asserts).
 - One behavior per test; shared behavior via data providers with explicit
   data — no conditionals inside tests. Cover success, auth/validation
@@ -80,7 +81,7 @@ Order is Unit then Feature: unit locks the business rule in isolation; feature l
 ## What not to test by default
 
 - Language/type-system guarantees (param assignment, pass-through getter/setter, trivial constructor): breaks loudly alone, no test.
-- Empty or pass-through classes with no branch: no test, add coverage-ignore (`@codeCoverageIgnore`, `istanbul ignore`, `coverage: exclude`) instead of fake tests.
+- Empty or pass-through classes with no branch: no test, add coverage-ignore (`@codeCoverageIgnore`, `istanbul ignore`, `coverage: exclude`) instead of fake tests. Any exclusion records its scope, technical reason, and work reference; it never hides changed observable behavior.
 - Private class/method in isolation: cover only via public entry points; privates are refactor-free detail.
 - Framework behavior, config outside scope, the whole suite for a localized change.
 - Exception: test trivial-looking code only on silent-failure risk (wrong default, bad mapping/normalization, swallowed error); when a route, config, or integration IS the changed contract or the likely regression boundary.

@@ -31,6 +31,8 @@ justified reclassification. Never fix code or approve risk in preflight.
 evidence, checklist. Produces verification + review records (evidence,
 correctness, regressions, security, scope drift, risks, verdict). Never
 modifies implementation; findings give location, evidence, impact, smallest fix.
+Validate and Review both pass on the final diff before Release or Close. After
+Adjust, rerun the affected checks and re-review the resulting diff.
 - **Release:** inputs = green verify + release record (approver, target,
 readiness, smoke, observation window, rollback trigger). Human authorizes;
 agent prepares. Details in `release.md` (+ `incident.md` for hotfixes).
@@ -41,7 +43,8 @@ agent prepares. Details in `release.md` (+ `incident.md` for hotfixes).
   `Versioned Handoff` section carrying exactly the state needed to resume on
   another machine/agent. Every later stage reads it before acting.
 - **Progress** (temporary, local): step-to-step state; removed at Close.
-- **Review**: verdict + `file:line` findings graded blocking/non-blocking.
+- **Review**: verdict + `file:line` findings graded by severity
+  (`review-checklist.md`).
 
 ## Waves
 
@@ -65,8 +68,11 @@ record continuity in the spec's `Versioned Handoff`.
 Done if and only if: spec created; plan reviewed; implementation matches the
 approved spec; progress updated during execution and removed at close;
 handoff synced where applicable; review run against request + spec + diff +
-checklist; validations executed; docs updated or declared unnecessary;
-verdict + counted findings recorded.
+checklist and passed on the final diff; validations executed and passing; docs
+updated or declared unnecessary; verdict + counted findings recorded. Record
+Release and Observe as `N/A` with a reason when no release is required;
+otherwise human authorization, smoke and observation results, and any rollback
+outcome are recorded before Close.
 
 ## Continuity (ai-memory)
 

@@ -23,8 +23,10 @@ Answers "who does what" without duplicating workflow policy.
 - Verify delivery through the forge (branches, commits, diff, CI state), never
   through agent prose.
 - Pull requests: `never` (push-only), `manual` (agent drafts, human opens), or
-  `automatic` (project-owned open-only command after green push). Merge, force,
-  and administration stay human — opening a PR never approves it.
+  `automatic` (project-owned open-only command after green push). Automatic
+  opening requires a recorded human approval covering the work item and target
+  branch plus a green push; a mode setting alone grants no approval. Merge,
+  force, and administration stay human — opening a PR never approves it.
 - Git finalization: `confirm_each` (separate approval per commit and push;
   unresolved mode authorizes nothing) or `automatic` (only the validated commit
   + push for the recorded item/branch/remote; any scope/branch/risk change

@@ -3,6 +3,61 @@
 All notable changes to the `strict-code` skill. Versions below 1.0.0 are
 development iterations; 1.0.0 is the first stable release.
 
+## 1.5.0
+
+Standardization and mechanization pass.
+
+- Naming completed: enum cases, file names (kebab-case), Vue component files,
+  branch names (`type/kebab-slug`), acronym spelling (`Id`/`Url`), abbreviation
+  bans, booleans as predicates, plural collections, unit suffixes, `At`
+  timestamps in UTC, `On` dates.
+- Database naming: plural snake_case tables, `<singular>_id` foreign keys, and
+  `idx_`/`uq_`/`fk_`/`ck_` object prefixes (`conventions.md`).
+- Translation keys (`<domain>.<context>.<element>`) and stable snake_case
+  client error codes (`errors.code`), documented per endpoint, never renumbered
+  or reused (`api-contracts.md`).
+- Severity scale `blocking`/`major`/`minor`/`nit` with closure criteria; the
+  delivery review record grades findings by it.
+- Test names state behavior + scenario, no ticket numbers.
+- Dependencies: committed lockfile, installs from the lock, one-line
+  justification for new packages, audit gate before release, upgrades as their
+  own change.
+- Mechanization: `bin/strict-code check` plus a CI workflow validate that
+  references resolve, every guide is reachable from `SKILL.md`, the frontmatter
+  version matches the changelog, JSON examples parse, and RIGHT examples
+  contain no banned branch.
+- Shipped reference configs: `templates/commitlint.config.js`,
+  `templates/.editorconfig`, `templates/hooks/commit-msg`.
+
+## 1.4.0
+
+Language rule made normative, plus ambiguity hardening.
+
+- Language: en-US for every artifact (identifiers, files, branches, comments,
+  tests, logs, config keys, technical docs). Client-visible text — API
+  messages, UI strings, validation messages, notification/e-mail copy — is a
+  project decision taken at intake and recorded in the project profile; when no
+  decision exists, ask before implementing. One locale per surface, strings in
+  translation resources, ASCII identifiers. `style.md` owns the rule.
+- Commits: Conventional Commits always, required `commit-msg`; type and scope
+  stay en-US, description language follows the working conversation (en-US
+  default, pt-BR when that is the working language), never mixed within one
+  change. Subject/body/breaking-change shape defined in `conventions.md`.
+- Review: items recorded `PASS`/`FAIL`/`NOT RUN`/`N/A` with evidence, approval
+  only when every applicable blocking item passes; command evidence must cover
+  the reviewed revision and scope.
+- Closed verdict ambiguities: alternate-branch syntax and legacy scope;
+  formatter vs interpolation and URL encoding; envelope body rules, 400 vs 422,
+  whitelist miss → 500; ceiling counting (only above the ceiling fails,
+  promoted/variadic parameters, callback returns); measurement scope with
+  deletions and consumers; blocking vs advisory new-code targets; security
+  waiver process and cross-tenant proof; validate-and-review on the final diff,
+  re-review after adjust, Release/Observe N/A; derived-depth changes and risk
+  thresholds; core-vs-stack rule scope; automatic PR approval.
+- De-duplicated the 15-method ceiling out of `patterns.md`.
+- 1.3.0 and 1.3.1 were version bumps without changelog entries or tags; their
+  content is in git history.
+
 ## 1.2.2
 
 Consumer-mode boundary patch; `SKILL.md` keeps `1.2.1` until

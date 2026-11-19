@@ -36,9 +36,10 @@ Unknowns stay `NOT FOUND` until discovered; inferences are labeled as such.
 
 Derive deterministically: `minimal` (docs/small fixes), `standard`
 (default), `extended` (large, cross-module, sensitive, or high-risk work).
-Depth may only be RAISED by an explicitly recorded human decision — never
-lowered silently. Load only the guides the current phase requires; keep the
-rest deferred. A route is a depth contract, not permission to skip gates.
+New evidence may raise the derived depth (§4); lowering it below the derived
+value requires a recorded human decision. Load only the guides the current
+phase requires; keep the rest deferred. A route is a depth contract, not
+permission to skip gates.
 
 ## 4. Reclassify on evidence
 

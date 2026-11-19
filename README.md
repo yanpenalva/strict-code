@@ -127,7 +127,10 @@ canonical file).
 - Thin controllers, rules in services, queries in repositories.
 - Sanitized logs; authorization follows the route's explicit contract.
 - Every behavior change ships a focused test (80% target on new code).
-- Conventional Commits; merge/PR only with explicit human approval.
+- en-US for every artifact; client-visible copy is a project decision recorded
+  at intake (`style.md`).
+- Conventional Commits always; description language follows the conversation,
+  type/scope stay en-US; merge/PR only with explicit human approval.
 
 ```php
 // WRONG
@@ -177,6 +180,14 @@ named assignments with least privilege; production stays human-approved
 
 SemVer. `CHANGELOG.md` records every release; `v1.0.0` is the first stable
 release (dual-audited: executor + independent reviewer).
+
+Validate the standard itself before tagging — references resolve, every guide is
+reachable from `SKILL.md`, the version matches the changelog, JSON examples
+parse, and RIGHT examples contain no banned branch:
+
+```bash
+strict-code check
+```
 
 Cut a release with one command (clean tree + changelog entry required):
 
