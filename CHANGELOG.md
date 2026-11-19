@@ -55,8 +55,8 @@ Language rule made normative, plus ambiguity hardening.
   re-review after adjust, Release/Observe N/A; derived-depth changes and risk
   thresholds; core-vs-stack rule scope; automatic PR approval.
 - De-duplicated the 15-method ceiling out of `patterns.md`.
-- 1.3.0 and 1.3.1 were version bumps without changelog entries or tags; their
-  content is in git history.
+- 1.3.0 and 1.3.1 were released without changelog entries; their content is in
+  git history (`git log v1.3.1`).
 
 ## 1.2.2
 
